@@ -1,0 +1,10 @@
+.NavBarShopping {
+  background-color: #c9acacb6;
+  padding: 10px;
+  display: flex;
+  justify-content: start;
+}
+.NavBarShopping > p {
+  padding: 5px;
+  border: 2px solid #000;
+}
