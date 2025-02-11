@@ -1,7 +1,6 @@
 import "../styles/Panel4Component.css";
 import Panel4ComponentCell from "./Panel4ComponentCell";
 function Panel4Component(pros) {
-  pros.data;
   return (
     <div className="Panel4Component">
       <h4>title</h4>
@@ -10,9 +9,9 @@ function Panel4Component(pros) {
         {pros.data.map((item) => {
           return (
             <Panel4ComponentCell
-              link={item.link}
+              img={item.img}
               title={item.title}
-              key={item.link}
+              key={item.img}
             ></Panel4ComponentCell>
           );
         })}

@@ -1,0 +1,13 @@
+.Slider {
+  flex: auto;
+  display: flex;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 10px;
+  padding: 10px;
+  overflow-y: hidden;
+  overflow-x: scroll;
+}
+.Slider > div {
+  border: 1px solid #000;
+  min-width: 15vw;
+}

@@ -2,7 +2,7 @@ import "../styles/Panel4ComponentCell.css";
 function Panel4ComponentCell(pros) {
   return (
     <div className="Panel4ComponentCell">
-      <img src={pros.link} alt="" />
+      <img src={pros.img} alt="" />
       <h4>{pros.title}</h4>
     </div>
   );

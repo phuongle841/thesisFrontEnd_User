@@ -1,0 +1,8 @@
+.Slides {
+  background-color: #fff;
+  padding: 10px;
+  height: 30vh;
+  padding: 10px;
+  display: flex;
+  flex-direction: column;
+}

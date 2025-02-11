@@ -26,19 +26,3 @@
   border-radius: 4px;
   background-color: #fff;
 }
-.Slides {
-  height: 20vh;
-  padding: 10px;
-  display: flex;
-  flex-direction: column;
-}
-.Slider {
-  flex: auto;
-  display: grid;
-  grid-template-columns: repeat(5, 1fr);
-  gap: 10px;
-  padding: 10px;
-}
-.Slider > div {
-  border: 1px solid #000;
-}
