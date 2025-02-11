@@ -1,0 +1,9 @@
+.CopyRight {
+  background-color: rgb(19, 25, 33);
+  display: flex;
+  align-content: center;
+  justify-content: center;
+}
+.CopyRight > p {
+  padding: 10px;
+}

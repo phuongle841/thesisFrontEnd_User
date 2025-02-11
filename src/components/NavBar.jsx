@@ -2,19 +2,15 @@ import "../styles/NavBar.css";
 function NavBar() {
   return (
     <div className="navBar">
-      <div className="HomePage">
-        <p>DT</p>
-        <p>Delivery to VietNam</p>
-      </div>
+      <p>HOME</p>
+      <p>Delivery to VietNam</p>
       <div className="SearchBar">
-        <p>Search </p>
+        <input type="text" value="Search" />
       </div>
-      <div className="UserBar">
-        <p>EN</p>
-        <p>Hello, User.name</p>
-        <p>Return & Order</p>
-        <p>Cart</p>
-      </div>
+      <p>EN</p>
+      <p>Hello, User.name</p>
+      <p>Return & Order</p>
+      <p>Cart</p>
     </div>
   );
 }

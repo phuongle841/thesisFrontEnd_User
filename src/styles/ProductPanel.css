@@ -5,12 +5,16 @@
 }
 .ProductPanel > div {
   width: 70vw;
-  margin: 10px;
-  background-color: #00ffff;
-  border: solid 2px #000;
+}
+.MainAdvertisement {
+  margin: 10px 10px -20vh 10px;
+}
+.MainAdvertisement > img {
+  max-width: 100%;
+  max-height: 100%;
 }
 .Panels {
-  height: 70vh;
+  height: 80vh;
   display: grid;
   grid-template-columns: repeat(4, 1fr);
   grid-template-rows: repeat(2, 1fr);
@@ -18,7 +22,9 @@
   padding: 10px;
 }
 .Panels > div {
-  border: solid 2px #000;
+  border: solid 1px #000;
+  border-radius: 4px;
+  background-color: #fff;
 }
 .Slides {
   height: 20vh;
@@ -30,6 +36,8 @@
   flex: auto;
   display: grid;
   grid-template-columns: repeat(5, 1fr);
+  gap: 10px;
+  padding: 10px;
 }
 .Slider > div {
   border: 1px solid #000;

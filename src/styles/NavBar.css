@@ -1,18 +1,31 @@
 .navBar {
-  background-color: #c9acacb6;
-  padding: 10px;
-  display: grid;
-  grid-template-columns: 2fr 6fr 4fr;
-  gap: 10px;
-}
-.navBar > div {
-  border: 2px solid #000;
+  background-color: rgb(19, 25, 33);
+  padding: 4px;
+  padding-left: 10px;
   display: flex;
-  justify-content: space-around;
+  gap: 2px;
+  color: #fff;
 }
-.HomePage {
+.navBar > p {
+  border-radius: 2px;
+  border: 1px solid transparent;
+  padding: 10px;
+}
+.navBar > p:hover {
+  border: 1px solid #fff;
+  cursor: pointer;
 }
 .SearchBar {
+  flex: auto;
+  justify-self: center;
 }
-.UserBar {
+.SearchBar > input {
+  width: 100%;
+  height: 100%;
+}
+
+.SearchBar > input:focus {
+  padding: 2px;
+  outline: 0px;
+  border: 0px;
 }
