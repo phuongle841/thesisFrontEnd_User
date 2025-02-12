@@ -1,9 +1,12 @@
 import "../styles/Panel4ComponentCell.css";
-function Panel4ComponentCell(pros) {
+import { Link } from "react-router-dom";
+function Panel4ComponentCell(props) {
   return (
     <div className="Panel4ComponentCell">
-      <img src={pros.img} alt="" />
-      <h4>{pros.title}</h4>
+      <Link to={"category/" + props.data.id}>
+        <img src={props.data.img} alt="" />
+      </Link>
+      <h4>{props.data.title}</h4>
     </div>
   );
 }

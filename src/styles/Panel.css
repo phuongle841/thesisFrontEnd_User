@@ -5,8 +5,11 @@
   padding: 10px;
   gap: 10px;
 }
-.Panel > img {
+.Panel > a {
   flex: auto;
+}
+.Panel > a > img {
+  height: 100%;
   width: 100%;
 }
 .Panel > h4 {

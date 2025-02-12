@@ -6,7 +6,12 @@
 .Panel4ComponentCell > h4 {
   font-size: 12px;
 }
-.Panel4ComponentCell > img {
+
+.Panel4ComponentCell > a {
+  flex: auto;
+}
+
+.Panel4ComponentCell > a > img {
   height: 100%;
   width: 100%;
 }

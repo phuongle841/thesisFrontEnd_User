@@ -1,9 +1,12 @@
 import "../styles/Panel.css";
-function Panel(pros) {
+import { Link } from "react-router-dom";
+function Panel(props) {
   return (
     <div className="Panel">
-      <h4>{pros.title}</h4>
-      <img src={pros.img} alt="" />
+      <h4>{props.data.title}</h4>
+      <Link to={"category/" + props.data.id}>
+        <img src={props.data.img} alt="" />
+      </Link>
       <p>see more</p>
     </div>
   );

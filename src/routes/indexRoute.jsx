@@ -1,18 +1,21 @@
+import App from "../App";
+
 import Category from "../components/Category";
 import Product from "../components/Product";
-import App from "../App";
+import ErrorPage from "../components/ErrorPage";
 
 const indexRoute = [
   {
     path: "/",
     element: <App></App>,
+    errorElement: <ErrorPage></ErrorPage>,
   },
   {
-    path: "Category",
+    path: "category/:id",
     element: <Category></Category>,
   },
   {
-    path: "Product",
+    path: "product/:id",
     element: <Product></Product>,
   },
 ];

@@ -9,8 +9,7 @@ function Panel4Component(pros) {
         {pros.data.map((item) => {
           return (
             <Panel4ComponentCell
-              img={item.img}
-              title={item.title}
+              data={item}
               key={item.img}
             ></Panel4ComponentCell>
           );
