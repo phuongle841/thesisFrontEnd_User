@@ -1,8 +1,11 @@
 import "../styles/NavBar.css";
+import { Link } from "react-router-dom";
 function NavBar() {
   return (
     <div className="navBar">
-      <p>HOME</p>
+      <p>
+        <Link to={"/"}>Home</Link>
+      </p>
       <p>Delivery to VietNam</p>
       <div className="SearchBar">
         <input type="text" value="Search" />

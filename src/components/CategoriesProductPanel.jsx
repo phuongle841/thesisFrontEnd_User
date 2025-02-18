@@ -4,9 +4,8 @@ import FilterMenu from "./FilterMenu";
 function CategoriesProductPanel(props) {
   return (
     <div id="CategoriesProductPanel">
-      <FilterMenu></FilterMenu>
+      <FilterMenu data={props.data}></FilterMenu>
       <CategoryContainer data={props.data}></CategoryContainer>
-      <div id="recommendProduct"></div>
     </div>
   );
 }

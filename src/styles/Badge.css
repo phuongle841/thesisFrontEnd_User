@@ -1,0 +1,24 @@
+.Badge {
+  position: absolute;
+  display: flex;
+  color: #fff;
+}
+.Badge > p {
+  font-size: small;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 3px;
+  background-color: #c45500;
+}
+.Badge > p:nth-child(3) {
+  background-color: #fff;
+  color: #c45500;
+  overflow-x: hidden;
+}
+.Badge > div {
+  width: 0;
+  height: 0;
+  border-right: 10px solid transparent;
+  border-top: 26px solid #c45500;
+}

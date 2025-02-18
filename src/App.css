@@ -1,6 +1,12 @@
 #root {
   display: flex;
   flex-direction: column;
-  background-color: #e3e6e6;
   min-height: 100vh;
+  --background-color-white: #fff;
+  --border-default: solid 1px #000;
+  --padding-default: 10px;
+  --border-radius-default: 2px;
+  --font-weight-bold: 700;
+  --font-weight-medium: 500;
+  --front-weight-low: 300;
 }

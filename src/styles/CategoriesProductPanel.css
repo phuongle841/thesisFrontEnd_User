@@ -1,4 +1,5 @@
 #CategoriesProductPanel {
-  flex: auto;
-  display: flex;
+  display: grid;
+  padding: 10px;
+  grid-template-columns: 1fr 6fr;
 }

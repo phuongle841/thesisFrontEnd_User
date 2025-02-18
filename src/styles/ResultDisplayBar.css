@@ -1,0 +1,10 @@
+#ResultDisplayBar {
+  display: flex;
+  justify-content: space-between;
+  padding: 10px;
+  border-bottom: solid 1px #000;
+  box-shadow: rgba(17, 12, 46, 0.15) 0px 5px 5px 0px;
+}
+#ResultDisplayBar > p > span {
+  color: #df8c8c;
+}
