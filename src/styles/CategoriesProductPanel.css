@@ -1,5 +1,7 @@
 #CategoriesProductPanel {
   display: grid;
-  padding: 10px;
+  padding: var(--padding-default);
+  padding-left: var(--padding-custom);
+  padding-right: var(--padding-custom);
   grid-template-columns: 1fr 6fr;
 }
