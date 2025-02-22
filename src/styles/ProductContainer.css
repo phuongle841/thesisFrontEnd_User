@@ -1,0 +1,9 @@
+.ProductContainer {
+  flex: auto;
+  display: grid;
+  grid-template-columns: 2fr 2fr 1fr;
+  gap: var(--gap-default);
+  padding: var(--padding-default);
+  padding-left: var(--padding-custom);
+  padding-right: var(--padding-custom);
+}

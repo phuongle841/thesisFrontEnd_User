@@ -1,0 +1,13 @@
+.ImagePreviewPanel {
+  border: var(--border-default);
+}
+.ImagePreviewPanel > .MainReview {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 700px;
+  max-width: 700px;
+}
+.MainReview > div {
+  flex: auto;
+}

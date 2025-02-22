@@ -37,6 +37,7 @@ function Category() {
         "Turtle Beach Stealth 700 Gen 3 Wireless Multiplatform Amplified Gaming Headset for PS5, PS4, PC, Mobile – 60mm",
       productRating: 2,
       productPrice: 33.33,
+      badge: "Gaming",
     },
     {
       productId: 4,
@@ -82,6 +83,7 @@ function Category() {
         "Turtle Beach Stealth 700 Gen 3 Wireless Multiplatform Amplified Gaming Headset for PS5, PS4, PC, Mobile – 60mm",
       productRating: 5,
       productPrice: 33.33,
+      badge: "Family",
     },
     {
       productId: 9,

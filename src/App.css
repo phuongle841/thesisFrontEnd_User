@@ -4,13 +4,14 @@
   min-height: 100vh;
   --background-color-white: #fff;
   --border-default: solid 1px #000;
+  --border-radius-default: 2px;
   --color-default: #000;
   --color-default-white: #fff;
   --color-a-hover: #c45500;
-  --padding-default: 10px;
-  --padding-custom: max(calc(100% - 1800px), var(--padding-default));
-  --border-radius-default: 2px;
   --font-weight-bold: 700;
   --font-weight-medium: 500;
   --front-weight-low: 300;
+  --gap-default: 5px;
+  --padding-default: 10px;
+  --padding-custom: max(calc(100% - 1800px), var(--padding-default));
 }

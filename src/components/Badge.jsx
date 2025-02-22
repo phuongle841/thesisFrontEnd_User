@@ -15,7 +15,7 @@ function Badge(props) {
           Best Seller
         </p>
         <div> </div>
-        {hoverState && <p>in Gaming</p>}
+        {hoverState && <p>in {props.category}</p>}
       </div>
     </>
   );

@@ -1,14 +1,19 @@
+import { useState } from "react";
 import "../styles/NavBar.css";
 import { Link } from "react-router-dom";
 function NavBar() {
+  const [input, setInput] = useState("");
+  const onChangeInput = (e) => {
+    setInput(e.target.value);
+  };
   return (
     <div className="navBar">
-      <p>
-        <Link to={"/"}>Home</Link>
-      </p>
+      <Link to={"/"}>
+        <p>Home</p>
+      </Link>
       <p>Delivery to VietNam</p>
       <div className="SearchBar">
-        <input type="text" value="Search" />
+        <input type="text" value={input} onChange={onChangeInput} />
       </div>
       <p>EN</p>
       <p>Hello, User.name</p>
