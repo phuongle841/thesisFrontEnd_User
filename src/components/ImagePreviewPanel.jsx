@@ -18,7 +18,7 @@ function ImagePreviewPanel(props) {
           height="500px"
           src={imgSrc}
           alt="A image to apply the ImageZoom plugin"
-          zoom="300"
+          zoom="170"
         />
       </div>
       <div className="ReviewSlider">

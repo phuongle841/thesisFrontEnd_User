@@ -1,18 +1,16 @@
 import "../styles/DescriptionPanel.css";
+import Rating from "react-rating";
+import AmountSelectBox from "./AmountSelectBox";
 function DescriptionPanel(props) {
   return (
     <div className="DescriptionPanel">
-      <h2>
-        Scrapbook Tape, 4 Pack Double Sided Tape Roller for Crafts, Adhesive
-        Glue Runner Scrapbooking Supplies Journaling School Office Supplies for
-        Kids and Adults, 0.3IN x 26FT
-      </h2>
-      <p>rating</p>
-      <p>number bought last month</p>
-      <p>price</p>
+      <h2 className="ProductTitle">{props.data.productName}</h2>
+      <Rating initialRating={props.data.productRating}></Rating>
+      <p>{props.data.productPrice}$</p>
       <p>number of item</p>
-      <hr />
+      <AmountSelectBox></AmountSelectBox>
       <p>about this item</p>
+      <hr />
       <ul>
         <li>
           Sticky & Safe to Use: Our double sided tape for crafts was made of

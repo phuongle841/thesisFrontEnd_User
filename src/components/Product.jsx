@@ -11,13 +11,20 @@ function Product(pros) {
   const { id } = useParams();
   const [data, SetDat] = useState({
     productId: 1,
+    productName:
+      "Scrapbook Tape, 4 Pack Double Sided Tape Roller for Crafts, Adhesive Glue Runner Scrapbooking Supplies Journaling School Office Supplies for Kids and Adults, 0.3IN x 26FT",
     productImages: [
       "https://m.media-amazon.com/images/I/71lfbwPaQXL._SX522_.jpg",
-      "https://m.media-amazon.com/images/I/41lwPZwMBqL._AC_US100_.jpg",
-      "https://m.media-amazon.com/images/I/41WM6KLVhzL._AC_US100_.jpg",
+      "https://m.media-amazon.com/images/I/714MP8eBL6L._SX522_.jpg",
+      "https://m.media-amazon.com/images/I/714C7wCxJtL._SX522_.jpg",
+      "https://m.media-amazon.com/images/I/71Z+AWZ6hvL._SX522_.jpg",
+      "https://m.media-amazon.com/images/I/71+Urd3faNL._SX522_.jpg",
+      "https://m.media-amazon.com/images/I/71x6NAZrxiL._SX522_.jpg",
+      "https://m.media-amazon.com/images/I/31UvXlbVq7L._AC_UF480,480_SR480,480_.jpg",
     ],
     productRating: 4,
     productPrice: 4.33,
+    productOrderAmount: [{ Amount: 4, data: ["6.66$", "(1.75 / Count)", ""] }],
     productDescription: "",
     productDetail: {
       PackageDimensions: "6.93 x 3.74 x 0.79 inches; 2.82 ounces",
