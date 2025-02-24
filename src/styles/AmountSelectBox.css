@@ -1,0 +1,14 @@
+.AmountSelectBox {
+  border: 1px solid transparent;
+  padding: var(--padding-default);
+  border-radius: var(--border-radius-large);
+}
+.AmountSelectBox > h2 {
+  border-bottom: 1px solid #000;
+}
+.AmountSelectBox > p {
+  text-wrap: nowrap;
+}
+.AmountSelectBox:hover {
+  border: var(--border-default);
+}

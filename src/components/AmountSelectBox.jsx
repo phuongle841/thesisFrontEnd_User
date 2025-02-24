@@ -1,14 +1,11 @@
 import "../styles/AmountSelectBox.css";
-function AmountSelectBox(props) {
+function AmountSelectBox({ Amount, data }) {
   return (
     <div className="AmountSelectBox">
-      <ul>
-        <li>8</li>
-        <hr />
-        <li>price</li>
-        <li>average</li>
-        <li>discount</li>
-      </ul>
+      <h2>{Amount}</h2>
+      {data.map((content) => (
+        <p key={content}> {content}</p>
+      ))}
     </div>
   );
 }

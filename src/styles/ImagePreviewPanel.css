@@ -1,5 +1,4 @@
 .ImagePreviewPanel {
-  border: var(--border-default);
   padding: var(--padding-default);
 }
 .ImagePreviewPanel > .MainReview {

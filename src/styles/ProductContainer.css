@@ -1,8 +1,8 @@
 .ProductContainer {
   flex: auto;
   display: grid;
-  grid-template-columns: 2fr 2fr 1fr;
-  gap: var(--gap-default);
+  grid-template-columns: 2fr 3fr 1fr;
+  gap: var(--gap-large);
   padding: var(--padding-default);
   padding-left: var(--padding-custom);
   padding-right: var(--padding-custom);

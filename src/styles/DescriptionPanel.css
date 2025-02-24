@@ -1,6 +1,21 @@
 .DescriptionPanel {
+  display: flex;
+  flex-direction: column;
+  gap: var(--gap-default);
   border: var(--border-default);
+  padding: var(--padding-default);
 }
-.DescriptionPanel > .ProductTitle {
+.DescriptionPanel .AmountSelect {
+  display: grid;
+  grid-template-columns: repeat(8, 1fr);
+  gap: var(--gap-default);
+  padding: var(--padding-default);
+}
+.DescriptionPanel .ProductTitle {
   font-weight: var(--font-weight-bold);
+}
+.DescriptionPanel .Description {
+  margin-left: var(--margin-ul-default);
+}
+.Description > li {
 }

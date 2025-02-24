@@ -1,3 +1,9 @@
-.OrderPanel {
+#OrderPanel {
+  display: flex;
+  flex-direction: column;
+  gap: var(--gap-default);
+  height: min-content;
   border: var(--border-default);
+  border-radius: var(--border-radius-large);
+  padding: var(--padding-large);
 }

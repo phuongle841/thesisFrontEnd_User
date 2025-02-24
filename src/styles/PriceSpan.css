@@ -1,0 +1,13 @@
+.price {
+  display: inline-flex;
+  align-items: flex-start;
+  width: min-content;
+}
+.price > .price-sign,
+.price > .price-faction {
+  font-size: 13px;
+}
+.price > .price-whole {
+  font-size: 26px;
+  height: min-content;
+}

@@ -4,14 +4,25 @@
   min-height: 100vh;
   --background-color-white: #fff;
   --border-default: solid 1px #000;
-  --border-radius-default: 2px;
+  --border-default-white: 1px solid transparent;
+  --border-radius-small: 2px;
+  --border-radius-default: 5px;
+  --border-radius-large: 10px;
   --color-default: #000;
   --color-default-white: #fff;
   --color-a-hover: #c45500;
   --font-weight-bold: 700;
   --font-weight-medium: 500;
   --front-weight-low: 300;
+  --gap-small: 3px;
   --gap-default: 5px;
+  --gap-large: 20px;
+  --margin-narrow: 2px;
+  --margin-default: 5px;
+  --margin-large: 10px;
+  --margin-ul-default: 20px;
+  --padding-small: 5px;
   --padding-default: 10px;
+  --padding-large: 20px;
   --padding-custom: max(calc(100% - 1800px), var(--padding-default));
 }
