@@ -8,9 +8,7 @@ function NavBar() {
   };
   return (
     <div className="navBar">
-      <Link to={"/"}>
-        <p>Home</p>
-      </Link>
+      <Link to={"/"}>Home</Link>
       <p>Delivery to VietNam</p>
       <div className="SearchBar">
         <input type="text" value={input} onChange={onChangeInput} />

@@ -1,7 +1,12 @@
 import "../styles/OrderPanel.css";
 import PriceSpan from "./PriceSpan";
+import moment from "moment";
 function OrderPanel(props) {
-  const deliveryDate = new Date(1 / 1 / 2025);
+  const deliveryDate = moment([14, 6, 2025], ["DD-MM-YYYY"]).format(
+    "MMMM DD YYYY"
+  );
+  const endOfDay = moment().endOf("date").fromNow();
+
   return (
     <div id="OrderPanel">
       <PriceSpan priceSign={"$"} priceWhole={6} priceFaction={99}></PriceSpan>
@@ -10,16 +15,15 @@ function OrderPanel(props) {
           <p> $4.11 ship and import change to VietNam</p>
         </div>
         <div id="delivery-date">
-          Delivery Tuesday, {deliveryDate.toString()}.Order within 16 hrs 12
-          mins
+          Delivery Tuesday, {deliveryDate}
+          .Order within {endOfDay}
         </div>
       </div>
-      <div>
+      <div className="order-information">
         <div id="stock label in-stock">
           <p>In Stock</p>
         </div>
         <div id="quantity-select">
-          <p>Quantity 1</p>
           <select name="quantity" id="quantity-select">
             <option value="1">Quantity 1</option>
             <option value="2">Quantity 2</option>

@@ -3,11 +3,17 @@
   flex-direction: column;
   min-height: 100vh;
   --background-color-white: #fff;
+  --button-add-to-cart-background-default: #ffd814;
+  --button-add-to-cart-background-hover: #ffce12;
+  --button-buy-now-background-default: #ffa41c;
+  --button-buy-now-background-hover: #fa8900;
+  --border-default-none: none;
   --border-default: solid 1px #000;
   --border-default-white: 1px solid transparent;
   --border-radius-small: 2px;
   --border-radius-default: 5px;
   --border-radius-large: 10px;
+  --border-radius-extra-large: 100px;
   --color-default: #000;
   --color-default-white: #fff;
   --color-a-hover: #c45500;
@@ -16,7 +22,8 @@
   --front-weight-low: 300;
   --gap-small: 3px;
   --gap-default: 5px;
-  --gap-large: 20px;
+  --gap-large: 10px;
+  --gap-extra-large: 20px;
   --margin-narrow: 2px;
   --margin-default: 5px;
   --margin-large: 10px;
@@ -25,4 +32,5 @@
   --padding-default: 10px;
   --padding-large: 20px;
   --padding-custom: max(calc(100% - 1800px), var(--padding-default));
+  --text-color-default: #fff;
 }

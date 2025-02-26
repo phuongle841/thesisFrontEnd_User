@@ -7,3 +7,39 @@
   border-radius: var(--border-radius-large);
   padding: var(--padding-large);
 }
+.order-information {
+  display: flex;
+  flex-direction: column;
+  gap: var(--gap-default);
+}
+.order-information > #quantity-select > select {
+  width: 100%;
+  padding: var(--padding-small);
+  border-radius: 0%;
+  background-color: #f0f2f2;
+}
+.order-information > #order-buttons {
+  display: flex;
+  flex-direction: column;
+  gap: var(--gap-default);
+}
+.order-information > #order-buttons > button {
+  padding: var(--padding-small);
+  border-radius: var(--border-radius-extra-large);
+  border: var(--border-default-non);
+  cursor: pointer;
+}
+
+.order-information > #order-buttons > #buy-now {
+  background-color: var(--button-buy-now-background-default);
+}
+.order-information > #order-buttons > #buy-now:hover {
+  background-color: var(--button-buy-now-background-hover);
+}
+
+.order-information > #order-buttons > #add-to-cart {
+  background-color: var(--button-add-to-cart-background-default);
+}
+.order-information > #order-buttons > #add-to-cart:hover {
+  background-color: var(--button-add-to-cart-background-hover);
+}
