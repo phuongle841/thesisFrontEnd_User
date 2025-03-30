@@ -1,5 +1,5 @@
 import "../styles/DescriptionPanel.css";
-import Rating from "react-rating";
+import { Rating } from "@mui/material";
 import AmountSelectBox from "./AmountSelectBox";
 import { useState } from "react";
 function DescriptionPanel({ data }) {
@@ -14,7 +14,8 @@ function DescriptionPanel({ data }) {
   return (
     <div className="DescriptionPanel">
       <h2 className="ProductTitle">{productName}</h2>
-      <Rating initialRating={productRating}></Rating>
+      {/* err: display rating */}
+      {/* <Rating value={productRating}></Rating> */}
       <p>{productPrice}$</p>
       <div>
         <p>Number of item:</p>

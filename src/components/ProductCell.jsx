@@ -1,19 +1,43 @@
-import "../styles/ProductCell.css";
-import { Link } from "react-router-dom";
-import Rating from "react-rating";
+import { Link as RouterLink } from "react-router";
+import {
+  Box,
+  Button,
+  Card,
+  Link,
+  CardContent,
+  CardMedia,
+  CardActions,
+} from "@mui/material";
+import Rating from "@mui/material/Rating";
+
 import Badge from "./Badge";
 function ProductCell(props) {
   return (
-    <div className="ProductCell">
+    <Card sx={{ height: "auto" }}>
       {props.data.badge ? <Badge category={props.data.badge}></Badge> : <></>}
-      <img src={props.data.productImg} alt="" />
-      <Link to={"/product/" + props.data.productId}>
-        <p>{props.data.productTitle}</p>
-      </Link>
-      <Rating initialRating={props.data.productRating} readonly={true}></Rating>
-      <p>{props.data.productPrice} vnd</p>
-      <button>Add to Cart</button>
-    </div>
+      <CardMedia
+        component="img"
+        image={props.data.productImg}
+        sx={{ height: 300 }}
+      ></CardMedia>
+      <CardContent>
+        <Link
+          className="p-4-lines-limit"
+          component={RouterLink}
+          to={"/product/" + props.data.productId}
+          underline="none"
+          color="error"
+        >
+          {props.data.productTitle}
+        </Link>
+        <br />
+        <Rating defaultValue={2} sx={{ width: "1", maxWidth: "max-content" }} />
+        <p>{props.data.productPrice} vnd</p>
+      </CardContent>
+      <CardActions>
+        <Button variant="contained">Add to Cart</Button>
+      </CardActions>
+    </Card>
   );
 }
 export default ProductCell;

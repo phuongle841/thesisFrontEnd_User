@@ -32,5 +32,4 @@
   --padding-default: 10px;
   --padding-large: 20px;
   --padding-custom: max(calc(100% - 1800px), var(--padding-default));
-  --text-color-default: #fff;
 }

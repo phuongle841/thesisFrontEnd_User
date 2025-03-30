@@ -5,36 +5,15 @@ import NavFooter from "./NavFooter";
 import CategoriesProductPanel from "./CategoriesProductPanel";
 import { useState, useEffect } from "react";
 import ResultDisplayBar from "./ResultDisplayBar";
-import "../styles/Category.css";
+import { Skeleton } from "@mui/material";
 
 // Display list of products
 function Category() {
   const { id } = useParams();
-  const [data, setData] = useState([
-    {
-      productId: 1,
-      productImg:
-        "https://m.media-amazon.com/images/I/813RiR0wH+L._AC_UL320_.jpg",
-      productTitle:
-        "240W Charger for ASUS ROG Zephyrus G14 G15 M16 G16 S15 S17, Rog Flow X16 GV601, Rog Strix g17 g513 Scar Charge Zenbook Pro Duo 15 ASUS TUF Gaming A15 F15 A17 vivobook s533e 20V 12A AC Adapter",
-      productRating: 4,
-      productPrice: 33.33,
-    },
-  ]);
+  const [data, setData] = useState();
 
   useEffect(() => {
     let ignore = false;
-    setData([
-      {
-        productId: 1,
-        productImg:
-          "https://m.media-amazon.com/images/I/813RiR0wH+L._AC_UL320_.jpg",
-        productTitle:
-          "240W Charger for ASUS ROG Zephyrus G14 G15 M16 G16 S15 S17, Rog Flow X16 GV601, Rog Strix g17 g513 Scar Charge Zenbook Pro Duo 15 ASUS TUF Gaming A15 F15 A17 vivobook s533e 20V 12A AC Adapter",
-        productRating: 4,
-        productPrice: 33.33,
-      },
-    ]);
     fetch("http://localhost:3000/products", { mode: "cors" })
       .then((response) => response.json())
       .then((response) => {
@@ -44,6 +23,7 @@ function Category() {
             : (value["productImg"] =
                 "https://avatars.githubusercontent.com/u/6677444");
           // delete value["productImages"];
+          value["productTitle"] = value["productName"];
           if (!ignore) {
             setData(response);
           }
@@ -61,7 +41,11 @@ function Category() {
       <NavBar></NavBar>
       <NavBarShopping></NavBarShopping>
       <ResultDisplayBar></ResultDisplayBar>
-      <CategoriesProductPanel data={data}></CategoriesProductPanel>
+      {data ? (
+        <CategoriesProductPanel data={data}></CategoriesProductPanel>
+      ) : (
+        <Skeleton></Skeleton>
+      )}
       <NavFooter></NavFooter>
     </>
   );

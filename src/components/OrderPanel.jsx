@@ -23,16 +23,18 @@ function OrderPanel(props) {
         <div id="stock label in-stock">
           <p>In Stock</p>
         </div>
-        <div id="quantity-select">
-          <select name="quantity" id="quantity-select">
-            <option value="1">Quantity 1</option>
-            <option value="2">Quantity 2</option>
-            <option value="3">Quantity 3</option>
-          </select>
-        </div>
+        <div id="quantity-select"></div>
         <div id="order-buttons">
           <button id="add-to-cart">Add to cart</button>
-          <button id="buy-now">Buy now</button>
+          <form action="" method="post">
+            <select name="quantity" id="quantity-select">
+              <option value="1">Quantity 1</option>
+              <option value="2">Quantity 2</option>
+              <option value="3">Quantity 3</option>
+            </select>
+            <br />
+            <button type="submit">Buy now</button>
+          </form>
         </div>
       </div>
       <div id="product-origin-information">

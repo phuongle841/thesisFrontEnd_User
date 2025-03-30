@@ -1,4 +1,6 @@
 import "./App.css";
+import "@fontsource/roboto/300.css";
+
 import NavBar from "./components/NavBar";
 import NavBarShopping from "./components/NavBar_Shopping";
 import NavFooter from "./components/NavFooter";

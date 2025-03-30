@@ -1,23 +1,43 @@
 import { useState } from "react";
-import "../styles/NavBar.css";
-import { Link } from "react-router-dom";
+import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
+import AirportShuttleIcon from "@mui/icons-material/AirportShuttle";
+// import "../styles/NavBar.css";
+import { Link as RouterLink } from "react-router-dom";
+import { Box, Button, Input, Link, TextField } from "@mui/material";
+import Asynchronous from "./AsynchronousSearchBar";
 function NavBar() {
-  const [input, setInput] = useState("");
-  const onChangeInput = (e) => {
-    setInput(e.target.value);
-  };
   return (
-    <div className="navBar">
-      <Link to={"/"}>Home</Link>
-      <p>Delivery to VietNam</p>
-      <div className="SearchBar">
-        <input type="text" value={input} onChange={onChangeInput} />
-      </div>
-      <p>EN</p>
-      <p>Hello, User.name</p>
-      <p>Return & Order</p>
-      <p>Cart</p>
-    </div>
+    <Box
+      display={"flex"}
+      alignContent={"center"}
+      justifyContent={"center"}
+      padding={"2px"}
+    >
+      <Link
+        component={RouterLink}
+        to={"/"}
+        underline="none"
+        color="primary"
+        display={"inherit"}
+      >
+        <Button>Home</Button>
+      </Link>
+      <Button>
+        <p>Delivery to VietNam</p>
+      </Button>
+
+      <Box flex={"auto"}>
+        <Asynchronous></Asynchronous>
+      </Box>
+      <Button>
+        <AirportShuttleIcon />
+        <p>Return & Order</p>
+      </Button>
+      <Button>
+        <ShoppingCartIcon />
+        <p>Cart</p>
+      </Button>
+    </Box>
   );
 }
 export default NavBar;

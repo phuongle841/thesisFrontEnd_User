@@ -1,41 +1,7 @@
-.ProductCell {
-  display: flex;
-  flex-direction: column;
-  align-items: self-start;
-  gap: 5px;
-  background-color: #fff;
-  border-radius: var(--border-radius-default);
-  box-shadow: rgba(17, 17, 26, 0.05) 0px 1px 0px,
-    rgba(17, 17, 26, 0.1) 0px 0px 8px;
-  padding: var(--padding-default);
-}
-.ProductCell > img {
-  width: 100%;
-  height: 50%;
-}
-.ProductCell > a,
-.ProductCell > a:visited {
-  color: #000;
-  text-decoration: none;
-}
-.ProductCell > a:hover,
-.ProductCell > a:visited:hover {
-  color: var(--color-a-hover);
-}
-.ProductCell > a > p {
+.p-4-lines-limit {
   font-weight: var(--font-weight-medium);
   display: -webkit-box;
   -webkit-box-orient: vertical;
   -webkit-line-clamp: 4;
   overflow: hidden;
-}
-.ProductCell > button {
-  padding: 5px;
-  border: none;
-  border-radius: 20px;
-  background-color: #ffd814;
-  font-weight: var(--font-weight-medium);
-}
-.ProductCell > button:hover {
-  background-color: #ffce12;
 }
