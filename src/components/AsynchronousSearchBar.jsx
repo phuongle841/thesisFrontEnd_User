@@ -35,13 +35,10 @@ export default function Asynchronous() {
         .then((response) => response.json())
         .then((response) => {
           if (ignore == false) {
-            console.log(response);
-
             setOptions([...response]);
           }
         })
         .catch((error) => console.error(error));
-
       return () => {
         ignore = true;
       };
@@ -78,6 +75,13 @@ export default function Asynchronous() {
           <TextField
             {...params}
             label="Search"
+            onKeyDown={(event) => {
+              if (event.key === "Enter" && query.trim() !== "") {
+                console.log(query);
+
+                navigate(`/category/${encodeURIComponent(query)}`);
+              }
+            }}
             slotProps={{
               input: {
                 ...params.InputProps,

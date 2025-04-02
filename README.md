@@ -7,3 +7,5 @@
 - search function ✓
 - today deal
 - customer service form
+- cart page
+- order page
