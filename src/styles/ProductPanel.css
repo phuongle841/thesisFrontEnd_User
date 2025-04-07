@@ -15,15 +15,8 @@
   max-height: 100%;
 }
 .Panels {
-  height: 80vh;
   display: grid;
   grid-template-columns: repeat(4, 1fr);
-  grid-template-rows: repeat(2, 1fr);
   gap: 10px;
   padding: 10px;
-}
-.Panels > div {
-  border: solid 1px #000;
-  border-radius: 4px;
-  background-color: #fff;
 }

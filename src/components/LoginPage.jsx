@@ -7,7 +7,6 @@ import Link from "@mui/material/Link";
 import TextField from "@mui/material/TextField";
 import Typography from "@mui/material/Typography";
 import Card from "@mui/material/Card";
-import ForgotPassword from "./LoginPageComponents/ForgotPassword";
 import { Link as RouterLink } from "react-router-dom";
 import NavBar from "./NavBar";
 import { Collapse, Container } from "@mui/material";
@@ -176,7 +175,6 @@ export default function LoginPage() {
                   control={<Checkbox value="remember" color="primary" />}
                   label="Remember me"
                 /> */}
-                <ForgotPassword open={open} handleClose={handleClose} />
                 <Button
                   type="submit"
                   fullWidth

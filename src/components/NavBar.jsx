@@ -1,17 +1,13 @@
 import { useState } from "react";
+import HomeIcon from "@mui/icons-material/Home";
 import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
 import AirportShuttleIcon from "@mui/icons-material/AirportShuttle";
-// import "../styles/NavBar.css";
-import { Link as RouterLink } from "react-router-dom";
-import { Box, Button, Input, Link, TextField } from "@mui/material";
+import AccountCircleIcon from "@mui/icons-material/AccountCircle";
+import LocationOnIcon from "@mui/icons-material/LocationOn";
+import { Badge, Box } from "@mui/material";
 import Asynchronous from "./AsynchronousSearchBar";
+import DirectoryLink from "./DirectoryLink";
 function NavBar() {
-  const directories = [
-    { link: "", name },
-    { link: "", name },
-    { link: "", name },
-    { link: "", name },
-  ];
   return (
     <Box
       display={"flex"}
@@ -19,47 +15,42 @@ function NavBar() {
       justifyContent={"center"}
       padding={"2px"}
     >
-      <Link
-        component={RouterLink}
-        to={"/"}
-        underline="none"
-        color="primary"
-        display={"inherit"}
-      >
-        <Button>Home</Button>
-      </Link>
-      <Button>
-        <p>Delivery to VietNam</p>
-      </Button>
+      <DirectoryLink
+        link={"/"}
+        buttonValue={"Home"}
+        icon={<HomeIcon></HomeIcon>}
+      ></DirectoryLink>
+      <DirectoryLink
+        link={"/location"}
+        buttonValue={"Delivery to VietNam"}
+        icon={<LocationOnIcon></LocationOnIcon>}
+      ></DirectoryLink>
 
       <Box flex={"auto"}>
         <Asynchronous></Asynchronous>
       </Box>
-      <Link
-        component={RouterLink}
-        to={"/login"}
-        display={"inherit"}
-        underline="none"
-      >
-        <Button>
-          <p>hello, signin</p>
-        </Button>
-      </Link>
-      <Button>
-        <AirportShuttleIcon />
-        <p>Return & Order</p>
-      </Button>
-      <Link
-        component={RouterLink}
-        to={"/cart"}
-        display={"inherit"}
-        underline="none"
-      >
-        <Button>
-          <ShoppingCartIcon />
-          <p>Cart</p>
-        </Button>
-      </Link>
+
+      <DirectoryLink
+        link={"/order"}
+        buttonValue={"Return & Order"}
+        icon={<AirportShuttleIcon></AirportShuttleIcon>}
+      ></DirectoryLink>
+
+      <DirectoryLink
+        link={"/cart"}
+        buttonValue={"Cart"}
+        icon={
+          <Badge badgeContent={4} color="primary" size={"small"}>
+            <ShoppingCartIcon></ShoppingCartIcon>
+          </Badge>
+        }
+      ></DirectoryLink>
+
+      <DirectoryLink
+        link={"/profile/20281"}
+        buttonValue={"Hello"}
+        icon={<AccountCircleIcon></AccountCircleIcon>}
+      ></DirectoryLink>
     </Box>
   );
 }

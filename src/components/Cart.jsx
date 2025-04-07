@@ -1,5 +1,8 @@
 import { useEffect, useState } from "react";
 import { getCookieValue } from "../utils/Cookies";
+import NavBar from "./NavBar";
+import NavBarShopping from "./NavBar_Shopping";
+import NavFooter from "./NavFooter";
 
 function Cart() {
   const [loginStatus, setLoginStatus] = useState(false);
@@ -27,8 +30,11 @@ function Cart() {
   });
   return (
     <>
+      <NavBar></NavBar>
+      <NavBarShopping></NavBarShopping>
       <p>this is cart</p>
       {loginStatus == null ? <p>error in fetch</p> : <p>no problem</p>}
+      <NavFooter></NavFooter>
     </>
   );
 }
