@@ -9,6 +9,7 @@ import SignUpPage from "../components/SignUpPage";
 import Profile from "../components/Profile";
 import Order from "../components/Order";
 import Location from "../components/Location";
+import SearchPage from "../components/SearchBar";
 const indexRoute = [
   {
     path: "/",
@@ -16,11 +17,11 @@ const indexRoute = [
     errorElement: <ErrorPage></ErrorPage>,
   },
   {
-    path: "category/:id",
+    path: "/category/:id",
     element: <Category></Category>,
   },
   {
-    path: "product/:id",
+    path: "/product/:id",
     element: <Product></Product>,
   },
   {
@@ -38,12 +39,14 @@ const indexRoute = [
   },
   {
     path: "/order",
-    element: <Order></Order>,
+    // element: <Order></Order>,
+    element: <LoginPage></LoginPage>,
   },
   {
     path: "/location",
     element: <Location></Location>,
   },
+  { path: "/search/:context", element: <SearchPage></SearchPage> },
 ];
 
 export default indexRoute;

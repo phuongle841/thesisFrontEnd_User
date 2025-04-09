@@ -14,20 +14,18 @@ function Category() {
 
   useEffect(() => {
     let ignore = false;
-    fetch("http://localhost:3000/products", { mode: "cors" })
+    fetch(`http://localhost:3000/categories/${id}`, { mode: "cors" })
       .then((response) => response.json())
       .then((response) => {
-        response = response.map((value) => {
-          value["productImages"] != null
-            ? (value["productImg"] = value["productImages"][0])
-            : (value["productImg"] =
-                "https://avatars.githubusercontent.com/u/6677444");
-          // delete value["productImages"];
+        let { product } = response;
+        product = product.map((value) => {
+          value["productImg"] = value["productImages"][0];
           value["productTitle"] = value["productName"];
-          if (!ignore) {
-            setData(response);
-          }
+          return value;
         });
+        if (!ignore) {
+          setData(product);
+        }
       })
       .catch((error) => console.error(error));
 

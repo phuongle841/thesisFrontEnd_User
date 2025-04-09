@@ -7,7 +7,7 @@ function Order() {
     <>
       <NavBar></NavBar>
       <NavBarShopping></NavBarShopping>
-      <Box component={Container}></Box>
+      <Box component={Container} flex={"auto"}></Box>
       <NavFooter></NavFooter>
     </>
   );

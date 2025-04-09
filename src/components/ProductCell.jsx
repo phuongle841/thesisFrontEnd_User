@@ -11,11 +11,13 @@ import Rating from "@mui/material/Rating";
 
 import Badge from "./Badge";
 function ProductCell(props) {
+  const link = `/product/${props.data.productId}`;
   return (
-    <Card sx={{ height: "auto" }}>
+    <Card sx={{ height: "auto", padding: 1 }}>
       {props.data.badge ? <Badge category={props.data.badge}></Badge> : <></>}
       <CardMedia
-        component="img"
+        component={RouterLink}
+        to={link}
         image={props.data.productImg}
         sx={{ height: 300 }}
       ></CardMedia>

@@ -78,8 +78,11 @@ export default function Asynchronous() {
             onKeyDown={(event) => {
               if (event.key === "Enter" && query.trim() !== "") {
                 console.log(query);
-
-                navigate(`/category/${encodeURIComponent(query)}`);
+                try {
+                  navigate(`/search/${encodeURIComponent(query)}`);
+                } catch (error) {
+                  console.log(error);
+                }
               }
             }}
             slotProps={{

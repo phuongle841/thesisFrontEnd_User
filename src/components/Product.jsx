@@ -1,6 +1,6 @@
 // Display product information and add to Cart
-import { useParams } from "react-router-dom";
-import { useState } from "react";
+import { useFetcher, useParams } from "react-router-dom";
+import { useEffect, useState } from "react";
 import "../styles/Product.css";
 
 import NavBar from "./NavBar";
@@ -72,11 +72,53 @@ function Product(pros) {
     ],
   });
 
+  const [product, setProduct] = useState(null);
+  useEffect(() => {
+    let ignore = false;
+    fetch(`http://localhost:3000/products/${id}`, { mode: "cors" })
+      .then((response) => response.json())
+      .then((response) => {
+        if (!ignore) {
+          const fetchedProductId = response.productId;
+          const fetchedProductImages = response.productImages;
+          const fetchedProductName = response.productName;
+          const fetchedProductPrice = response.productPrice;
+          const fetchedProductRating = response.productRating;
+
+          const {
+            productId,
+            productImages,
+            productName,
+            productPrice,
+            productRating,
+            ...others
+          } = data;
+          const result = {
+            productId: fetchedProductId,
+            productImages: fetchedProductImages,
+            productName: fetchedProductName,
+            productPrice: fetchedProductPrice,
+            productRating: fetchedProductRating,
+            ...others,
+          };
+          setProduct(result);
+        }
+      })
+      .catch((error) => console.error(error));
+    return () => {
+      ignore = true;
+    };
+  }, []);
+
   return (
     <>
       <NavBar></NavBar>
       <NavBarShopping></NavBarShopping>
-      <ProductContainer data={data}></ProductContainer>
+      {product ? (
+        <ProductContainer data={product}></ProductContainer>
+      ) : (
+        <p>Fetching</p>
+      )}
       <NavFooter></NavFooter>
     </>
   );
