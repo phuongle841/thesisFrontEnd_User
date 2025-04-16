@@ -32,7 +32,10 @@ function ProductCell(props) {
           {props.data.productTitle}
         </Link>
         <br />
-        <Rating defaultValue={2} sx={{ width: "1", maxWidth: "max-content" }} />
+        <Rating
+          defaultValue={props.data.productRating}
+          sx={{ width: "1", maxWidth: "max-content" }}
+        />
         <p>{props.data.productPrice} vnd</p>
       </CardContent>
       <CardActions>

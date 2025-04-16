@@ -1,5 +1,5 @@
 // Display product information and add to Cart
-import { useFetcher, useParams } from "react-router-dom";
+import { useParams } from "react-router-dom";
 import { useEffect, useState } from "react";
 import "../styles/Product.css";
 
@@ -9,7 +9,7 @@ import NavFooter from "./NavFooter";
 import ProductContainer from "./ProductContainer";
 function Product(pros) {
   const { id } = useParams();
-  const [data, SetDat] = useState({
+  const [data, SetData] = useState({
     productId: 1,
     productName:
       "Scrapbook Tape, 4 Pack Double Sided Tape Roller for Crafts, Adhesive Glue Runner Scrapbooking Supplies Journaling School Office Supplies for Kids and Adults, 0.3IN x 26FT",

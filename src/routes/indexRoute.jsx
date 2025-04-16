@@ -32,18 +32,17 @@ const indexRoute = [
     path: "/signup",
     element: <SignUpPage></SignUpPage>,
   },
-  { path: "/cart", element: <Cart></Cart> },
+  { path: "/cart/:id", element: <Cart></Cart> },
   {
     path: "/profile/:id",
     element: <Profile></Profile>,
   },
   {
-    path: "/order",
-    // element: <Order></Order>,
-    element: <LoginPage></LoginPage>,
+    path: "/order/:id",
+    element: <Order></Order>,
   },
   {
-    path: "/location",
+    path: "/location/:id",
     element: <Location></Location>,
   },
   { path: "/search/:context", element: <SearchPage></SearchPage> },

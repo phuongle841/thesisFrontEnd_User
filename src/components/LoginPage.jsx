@@ -13,24 +13,18 @@ import { Collapse, Container } from "@mui/material";
 import NavFooter from "./NavFooter";
 import NavBarShopping from "./NavBar_Shopping";
 import { useNavigate } from "react-router-dom";
-
+import { useContext } from "react";
 import { setCookie } from "../utils/Cookies";
+import { UserContext } from "../context/userContext";
 export default function LoginPage() {
+  // use history to ref to prev page
   const [emailError, setEmailError] = React.useState(false);
   const [emailErrorMessage, setEmailErrorMessage] = React.useState("");
   const [passwordError, setPasswordError] = React.useState(false);
   const [passwordErrorMessage, setPasswordErrorMessage] = React.useState("");
   const [authError, setAuthError] = React.useState("");
-  const [open, setOpen] = React.useState(false);
+  const { setUserId } = useContext(UserContext);
   const navigate = useNavigate();
-
-  const handleClickOpen = () => {
-    setOpen(true);
-  };
-
-  const handleClose = () => {
-    setOpen(false);
-  };
 
   const handleSubmit = (event) => {
     if (emailError || passwordError) {
@@ -62,8 +56,11 @@ export default function LoginPage() {
         setAuthError("cannot authenticate users");
       } else {
         // set token into local storage
-        const { token } = content;
-        setCookie("Authorization", token);
+        const { token, userId } = content;
+        const url = `/profile/${userId.userId}`;
+        setCookie("Authorization", "Bearer " + token);
+        setUserId(userId.userId);
+        navigate(url);
       }
     })();
   };
@@ -171,10 +168,6 @@ export default function LoginPage() {
                   />
                 </FormControl>
                 <Collapse>{authError && <p>{authError}</p>}</Collapse>
-                {/* <FormControlLabel
-                  control={<Checkbox value="remember" color="primary" />}
-                  label="Remember me"
-                /> */}
                 <Button
                   type="submit"
                   fullWidth
@@ -183,15 +176,6 @@ export default function LoginPage() {
                 >
                   Sign in
                 </Button>
-                <Link
-                  component="button"
-                  type="button"
-                  onClick={handleClickOpen}
-                  variant="body2"
-                  sx={{ alignSelf: "center" }}
-                >
-                  Forgot your password?
-                </Link>
               </Box>
               <Box sx={{ display: "flex", flexDirection: "column", gap: 2 }}>
                 <Typography sx={{ textAlign: "center" }}>

@@ -10,4 +10,16 @@ function setCookie(name, value, days) {
   }
   document.cookie = name + "=" + (value || "") + expires + "; path=/";
 }
-export { getCookieValue, setCookie };
+
+function deleteCookie(name, path, domain) {
+  if (getCookieValue(name)) {
+    document.cookie =
+      name +
+      "=" +
+      (path ? ";path=" + path : "") +
+      (domain ? ";domain=" + domain : "") +
+      ";expires=Thu, 01 Jan 1970 00:00:01 GMT";
+  }
+}
+
+export { getCookieValue, setCookie, deleteCookie };

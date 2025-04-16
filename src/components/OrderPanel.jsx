@@ -1,7 +1,13 @@
+import { useContext } from "react";
 import "../styles/OrderPanel.css";
 import PriceSpan from "./PriceSpan";
 import moment from "moment";
+import { CartContext } from "../context/cartContext";
+import { useParams } from "react-router-dom";
 function OrderPanel(props) {
+  const { cartItems, addToCart } = useContext(CartContext);
+  const { id } = useParams();
+
   const deliveryDate = moment([14, 6, 2025], ["DD-MM-YYYY"]).format(
     "MMMM DD YYYY"
   );
@@ -25,7 +31,16 @@ function OrderPanel(props) {
         </div>
         <div id="quantity-select"></div>
         <div id="order-buttons">
-          <button id="add-to-cart">Add to cart</button>
+          <button
+            id="add-to-cart"
+            onClick={() => {
+              console.log(id);
+
+              addToCart();
+            }}
+          >
+            Add to cart
+          </button>
           <form action="" method="post">
             <select name="quantity" id="quantity-select">
               <option value="1">Quantity 1</option>
