@@ -1,0 +1,9 @@
+.cartContainer {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+.CartBox {
+  display: flex;
+  justify-content: space-between;
+}

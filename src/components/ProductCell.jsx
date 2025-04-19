@@ -10,8 +10,12 @@ import {
 import Rating from "@mui/material/Rating";
 
 import Badge from "./Badge";
+import { useContext } from "react";
+import { CartContext } from "../context/cartContext";
 function ProductCell(props) {
+  const { addCartItems } = useContext(CartContext);
   const link = `/product/${props.data.productId}`;
+  const { productId } = props.data;
   return (
     <Card sx={{ height: "auto", padding: 1 }}>
       {props.data.badge ? <Badge category={props.data.badge}></Badge> : <></>}
@@ -39,7 +43,14 @@ function ProductCell(props) {
         <p>{props.data.productPrice} vnd</p>
       </CardContent>
       <CardActions>
-        <Button variant="contained">Add to Cart</Button>
+        <Button
+          variant="contained"
+          onClick={() => {
+            addCartItems(productId);
+          }}
+        >
+          Add to Cart
+        </Button>
       </CardActions>
     </Card>
   );

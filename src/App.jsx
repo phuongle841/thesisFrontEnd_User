@@ -5,6 +5,9 @@ import NavBar from "./components/NavBar";
 import NavBarShopping from "./components/NavBar_Shopping";
 import NavFooter from "./components/NavFooter";
 import ProductPanel from "./components/ProductPanel";
+import { useContext, useEffect, useState } from "react";
+import { UserContext } from "./context/userContext";
+import { getCookieValue } from "./utils/Cookies";
 
 function App() {
   return (

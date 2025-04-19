@@ -1,49 +1,41 @@
 import { useContext, useEffect, useState } from "react";
-import { getCookieValue, deleteCookie } from "../utils/Cookies";
+import { getCookieValue } from "../utils/Cookies";
 import NavBar from "./NavBar";
 import NavBarShopping from "./NavBar_Shopping";
 import NavFooter from "./NavFooter";
-import { useNavigate } from "react-router-dom";
-import { Button, Skeleton } from "@mui/material";
+import { Box, Container, Divider, Skeleton, Typography } from "@mui/material";
 import { UserContext } from "../context/userContext";
+import SearchIcon from "@mui/icons-material/Search";
 import CartContainer from "./CartContainer";
+import { CartContext } from "../context/cartContext";
+import { Router, Link as RouterLink } from "react-router-dom";
+import { Link } from "@mui/material";
 
 function Cart() {
-  const [data, setData] = useState([]);
-  const { userId, setUserId } = useContext(UserContext);
-  const cookieState = getCookieValue("Authorization");
-
-  useEffect(() => {
-    let ignore = false;
-    fetch(`http://localhost:3000/users/${userId}/cart`, {
-      mode: "cors",
-      headers: { Authorization: cookieState },
-    })
-      .then((response) => {
-        return response.json();
-      })
-      .then((response) => {
-        if (ignore == false) {
-          const { productList } = response;
-          setData(productList);
-        }
-      })
-      .catch((error) => console.error(error));
-
-    return () => {
-      ignore = true;
-    };
-  }, []);
+  const { userId } = useContext(UserContext);
+  const { cart } = useContext(CartContext);
 
   return (
     <>
       <NavBar></NavBar>
       <NavBarShopping></NavBarShopping>
-      {data.length != 0 ? (
-        <CartContainer data={data}></CartContainer>
-      ) : (
-        <Skeleton></Skeleton>
-      )}
+      <Box component={Container} flex={"auto"} display={"flex"}>
+        {cart.length != 0 ? (
+          <CartContainer data={cart}></CartContainer>
+        ) : (
+          <div style={{ width: "100%" }}>
+            <h2>
+              <SearchIcon></SearchIcon>There no item in here?{" "}
+            </h2>
+            <Divider></Divider>
+            <h2>Want to wonder around to find something interesting</h2>
+            <Typography component={RouterLink} to={"/"}>
+              Today&#39;s deal
+            </Typography>
+          </div>
+        )}
+      </Box>
+
       <NavFooter></NavFooter>
     </>
   );

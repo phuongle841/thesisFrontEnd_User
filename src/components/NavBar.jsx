@@ -11,21 +11,24 @@ import DirectoryLink from "./DirectoryLink";
 import { DirectoryLinkSetting } from "./DirectoryLink";
 import { deleteCookie, getCookieValue, setCookie } from "../utils/Cookies";
 import { UserContext } from "../context/userContext";
-import { useNavigate } from "react-router-dom";
+import { data, useNavigate } from "react-router-dom";
+import { CartContext } from "../context/cartContext";
 
 function NavBar() {
   const navigate = useNavigate();
   const { userId, setUserId } = useContext(UserContext);
+  const { cart, setCartItems } = useContext(CartContext);
+
+  const cookieState = getCookieValue("Authorization");
 
   const [anchorElUser, setAnchorElUser] = useState(null);
 
   function logout() {
     deleteCookie("Authorization");
-    // same as but still have to reload page
     // link: https://stackoverflow.com/questions/21920162/cookie-not-set-until-a-second-refresh
-    // setCookie("Authorization", "");
     setUserId(null);
-    navigate("/");
+    setCartItems([]);
+    navigate("/login");
   }
 
   const settings = [
@@ -46,11 +49,10 @@ function NavBar() {
 
   useEffect(() => {
     let ignore = false;
-
     if (getCookieValue("Authorization") != "" && userId == null) {
       fetch(`http://localhost:3000/users/authenticate`, {
         mode: "cors",
-        headers: { Authorization: getCookieValue("Authorization") },
+        headers: { Authorization: cookieState },
       })
         .then((response) => {
           return response.json();
@@ -66,6 +68,57 @@ function NavBar() {
       ignore = true;
     };
   }, []);
+
+  useEffect(() => {
+    let ignore = false;
+    if (userId != null) {
+      fetch(`http://localhost:3000/users/${userId}/cart`, {
+        mode: "cors",
+        headers: { Authorization: cookieState },
+      })
+        .then((response) => {
+          return response.json();
+        })
+        .then((response) => {
+          if (ignore == false) {
+            const { productList } = response;
+            setCartItems(productList);
+          }
+        })
+        .catch((error) => console.error(error));
+    }
+    return () => {
+      ignore = true;
+    };
+  }, [userId]);
+
+  useEffect(() => {
+    let ignore = false;
+    if (userId != null) {
+      const data = cart.map((e) => e.productId);
+      fetch(`http://localhost:3000/users/${userId}/cart`, {
+        mode: "cors",
+        method: "PUT",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: cookieState,
+        },
+        body: JSON.stringify({ data: data }),
+      })
+        .then((response) => {
+          return response.json();
+        })
+        .then((response) => {
+          if (ignore == false) {
+            // todo
+          }
+        })
+        .catch((error) => console.error(error));
+    }
+    return () => {
+      ignore = true;
+    };
+  }, [cart]);
 
   return (
     <Box
@@ -99,7 +152,7 @@ function NavBar() {
         link={userId ? `/cart/${userId}` : `/login`}
         buttonValue={"Cart"}
         icon={
-          <Badge badgeContent={4} color="primary" size={"small"}>
+          <Badge badgeContent={cart.length} color="primary" size={"small"}>
             <ShoppingCartIcon></ShoppingCartIcon>
           </Badge>
         }

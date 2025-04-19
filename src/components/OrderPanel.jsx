@@ -4,8 +4,8 @@ import PriceSpan from "./PriceSpan";
 import moment from "moment";
 import { CartContext } from "../context/cartContext";
 import { useParams } from "react-router-dom";
-function OrderPanel(props) {
-  const { cartItems, addToCart } = useContext(CartContext);
+function OrderPanel() {
+  const { cart, addCartItems } = useContext(CartContext);
   const { id } = useParams();
 
   const deliveryDate = moment([14, 6, 2025], ["DD-MM-YYYY"]).format(
@@ -34,9 +34,7 @@ function OrderPanel(props) {
           <button
             id="add-to-cart"
             onClick={() => {
-              console.log(id);
-
-              addToCart();
+              addCartItems(id);
             }}
           >
             Add to cart
