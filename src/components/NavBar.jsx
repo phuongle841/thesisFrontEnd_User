@@ -13,6 +13,7 @@ import { deleteCookie, getCookieValue, setCookie } from "../utils/Cookies";
 import { UserContext } from "../context/userContext";
 import { data, useNavigate } from "react-router-dom";
 import { CartContext } from "../context/cartContext";
+import useSyncCart from "../hooks/useSyncCart";
 
 function NavBar() {
   const navigate = useNavigate();
@@ -69,6 +70,7 @@ function NavBar() {
     };
   }, []);
 
+  // set cart context
   useEffect(() => {
     let ignore = false;
     if (userId != null) {
@@ -80,9 +82,9 @@ function NavBar() {
           return response.json();
         })
         .then((response) => {
-          if (ignore == false) {
-            const { productList } = response;
-            setCartItems(productList);
+          if (ignore == false && Array.isArray(response.cartRecord)) {
+            const { cartRecord } = response;
+            setCartItems(cartRecord);
           }
         })
         .catch((error) => console.error(error));
@@ -92,33 +94,8 @@ function NavBar() {
     };
   }, [userId]);
 
-  useEffect(() => {
-    let ignore = false;
-    if (userId != null) {
-      const data = cart.map((e) => e.productId);
-      fetch(`http://localhost:3000/users/${userId}/cart`, {
-        mode: "cors",
-        method: "PUT",
-        headers: {
-          "Content-Type": "application/json",
-          Authorization: cookieState,
-        },
-        body: JSON.stringify({ data: data }),
-      })
-        .then((response) => {
-          return response.json();
-        })
-        .then((response) => {
-          if (ignore == false) {
-            // todo
-          }
-        })
-        .catch((error) => console.error(error));
-    }
-    return () => {
-      ignore = true;
-    };
-  }, [cart]);
+  // post user cart
+  useSyncCart({ userId, cart, cookieState });
 
   return (
     <Box

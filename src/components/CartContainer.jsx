@@ -1,11 +1,11 @@
 import "../styles/CartContainer.css";
 import PropTypes from "prop-types";
 import { Box, Button, Divider, Snackbar } from "@mui/material";
-import { useContext, useDeferredValue, useEffect, useState } from "react";
+import { useContext, useState } from "react";
 import { CartContext } from "../context/cartContext";
 import { delay } from "../utils/Delay";
 function CartBox({ item, i }) {
-  const [amount, setAmount] = useState(item.amount ? item.amount : 1);
+  const [amount, setAmount] = useState(item.quantity ? item.quantity : 1);
 
   var timeout;
   const [open, setOpen] = useState(false);
@@ -18,7 +18,7 @@ function CartBox({ item, i }) {
       <div className="CartBox">
         <div className="CartBox-left">
           <h1>{i}</h1>
-          <h3>{item.productName}</h3>
+          <h3>{item.recordProduct.productName}</h3>
           <p>Amount: {amount}</p>
         </div>
         <div className="CartBox-right">
@@ -48,25 +48,18 @@ function CartBox({ item, i }) {
 }
 
 function CartContainer({ data }) {
-  const [orderState, setOrderState] = useState(false);
-  const { cart } = useContext(CartContext);
-
-  useEffect(() => {
-    console.log(cart);
-  }, [orderState]);
-
-  function handleOrder() {
-    setOrderState(true);
-  }
   return (
     <>
       <Box className="cartContainer">
         {data.map((item, i) => {
-          return <CartBox key={item.productId} i={i} item={item}></CartBox>;
+          return (
+            <CartBox
+              key={item.recordProduct.productId}
+              i={i}
+              item={item}
+            ></CartBox>
+          );
         })}
-        <Box onClick={handleOrder}>
-          <Button>Order</Button>
-        </Box>
       </Box>
     </>
   );

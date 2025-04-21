@@ -39,7 +39,7 @@ function ProductPanel() {
     fetch(url, { mode: "cors" })
       .then((response) => response.json())
       .then((response) => {
-        if (!ignore) {
+        if (!ignore && Array.isArray(response)) {
           const data = response.map((element) => {
             const { categoryImage, categoryTitle, categoryId } = element;
 
