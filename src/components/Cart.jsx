@@ -17,7 +17,6 @@ import CartContainer from "./CartContainer";
 import { CartContext } from "../context/cartContext";
 import { Router, Link as RouterLink } from "react-router-dom";
 import { Link } from "@mui/material";
-
 function Cart() {
   const { userId } = useContext(UserContext);
   const { cart } = useContext(CartContext);

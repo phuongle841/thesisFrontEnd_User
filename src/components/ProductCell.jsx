@@ -22,7 +22,7 @@ function ProductCell(props) {
       <CardMedia
         component={RouterLink}
         to={link}
-        image={props.data.productImg}
+        image={props.data.productImages[0]}
         sx={{ height: 300 }}
       ></CardMedia>
       <CardContent>
@@ -33,7 +33,7 @@ function ProductCell(props) {
           underline="none"
           color="error"
         >
-          {props.data.productTitle}
+          {props.data.productName}
         </Link>
         <br />
         <Rating

@@ -6,6 +6,7 @@ import CategoriesProductPanel from "./CategoriesProductPanel";
 import { useState, useEffect } from "react";
 import ResultDisplayBar from "./ResultDisplayBar";
 import { Skeleton } from "@mui/material";
+import CategoryService from "../services/CategoryService";
 
 // Display list of products
 function Category() {
@@ -13,25 +14,8 @@ function Category() {
   const [data, setData] = useState();
 
   useEffect(() => {
-    let ignore = false;
-    fetch(`http://localhost:3000/categories/${id}`, { mode: "cors" })
-      .then((response) => response.json())
-      .then((response) => {
-        let { product } = response;
-        product = product.map((value) => {
-          value["productImg"] = value["productImages"][0];
-          value["productTitle"] = value["productName"];
-          return value;
-        });
-        if (!ignore) {
-          setData(product);
-        }
-      })
-      .catch((error) => console.error(error));
-
-    return () => {
-      ignore = true;
-    };
+    const fetchCategory = CategoryService.fetch;
+    fetchCategory(id, setData);
   }, []);
 
   return (

@@ -8,13 +8,14 @@ import { ThemeProvider } from "@mui/material";
 import theme from "./styles/themes.jsx";
 import { CartContext } from "./context/cartContext.jsx";
 import { UserContext } from "./context/userContext.jsx";
-
+import AuthorizationContext from "./context/authorizationContext.jsx";
+import { getCookieValue } from "./utils/Cookies.js";
 const router = createBrowserRouter(indexRoute);
+
 // todo: later refactor to separate module
 export default function ConTextApp() {
   const [cart, setCart] = useState([]);
   // be careful with the Id and ID
-  const [userId, setUserID] = useState(null);
 
   function addCartItems(newCartItem) {
     const newItems = [...cart];
@@ -25,30 +26,39 @@ export default function ConTextApp() {
   function setCartItems(cartItems) {
     setCart(cartItems);
   }
+
   function removeCartItem(cartItems) {
     const newItems = cart.filter((e) => e.productId != cartItems);
     setCart(newItems);
   }
 
+  const [userId, setUserID] = useState(null);
+
   function setUserId(userId) {
     setUserID(userId);
   }
+  // set authorization context
+  const [authorization, setAuthorization] = useState(
+    getCookieValue("Authorization")
+  );
 
   return (
-    <UserContext.Provider value={{ userId, setUserId }}>
-      <CartContext.Provider
-        value={{ cart, addCartItems, setCartItems, removeCartItem }}
-      >
-        <RouterProvider router={router}></RouterProvider>
-      </CartContext.Provider>{" "}
-    </UserContext.Provider>
+    <AuthorizationContext.Provider value={{ authorization, setAuthorization }}>
+      <UserContext.Provider value={{ userId, setUserId }}>
+        <CartContext.Provider
+          value={{ cart, addCartItems, setCartItems, removeCartItem }}
+        >
+          <ThemeProvider theme={theme}>
+            <RouterProvider router={router}></RouterProvider>
+          </ThemeProvider>
+        </CartContext.Provider>
+      </UserContext.Provider>{" "}
+    </AuthorizationContext.Provider>
   );
 }
 
 createRoot(document.getElementById("root")).render(
   <StrictMode>
-    <ThemeProvider theme={theme}>
-      <ConTextApp></ConTextApp>
-    </ThemeProvider>
+    <ConTextApp></ConTextApp>
   </StrictMode>
 );

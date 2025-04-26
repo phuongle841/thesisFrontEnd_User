@@ -9,24 +9,25 @@ import { Badge, Box, Button, Menu } from "@mui/material";
 import Asynchronous from "./AsynchronousSearchBar";
 import DirectoryLink from "./DirectoryLink";
 import { DirectoryLinkSetting } from "./DirectoryLink";
-import { deleteCookie, getCookieValue, setCookie } from "../utils/Cookies";
+import { deleteCookie, getCookieValue } from "../utils/Cookies";
 import { UserContext } from "../context/userContext";
-import { data, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { CartContext } from "../context/cartContext";
 import useSyncCart from "../hooks/useSyncCart";
+import cartService from "../services/cartService";
+import userService from "../services/userService";
 
 function NavBar() {
   const navigate = useNavigate();
   const { userId, setUserId } = useContext(UserContext);
   const { cart, setCartItems } = useContext(CartContext);
 
-  const cookieState = getCookieValue("Authorization");
+  const Authorization = getCookieValue("Authorization");
 
   const [anchorElUser, setAnchorElUser] = useState(null);
 
   function logout() {
     deleteCookie("Authorization");
-    // link: https://stackoverflow.com/questions/21920162/cookie-not-set-until-a-second-refresh
     setUserId(null);
     setCartItems([]);
     navigate("/login");
@@ -49,53 +50,24 @@ function NavBar() {
   };
 
   useEffect(() => {
-    let ignore = false;
-    if (getCookieValue("Authorization") != "" && userId == null) {
-      fetch(`http://localhost:3000/users/authenticate`, {
-        mode: "cors",
-        headers: { Authorization: cookieState },
-      })
-        .then((response) => {
-          return response.json();
-        })
-        .then((response) => {
-          if (ignore == false) {
-            setUserId(response.userId);
-          }
-        })
-        .catch((error) => console.error(error));
+    if (Authorization == "") {
+      return;
     }
-    return () => {
-      ignore = true;
-    };
+    let authentication = userService.authenticate;
+    authentication(Authorization, setUserId);
   }, []);
 
   // set cart context
   useEffect(() => {
-    let ignore = false;
-    if (userId != null) {
-      fetch(`http://localhost:3000/users/${userId}/cart`, {
-        mode: "cors",
-        headers: { Authorization: cookieState },
-      })
-        .then((response) => {
-          return response.json();
-        })
-        .then((response) => {
-          if (ignore == false && Array.isArray(response.cartRecord)) {
-            const { cartRecord } = response;
-            setCartItems(cartRecord);
-          }
-        })
-        .catch((error) => console.error(error));
+    if (userId == null) {
+      return;
     }
-    return () => {
-      ignore = true;
-    };
-  }, [userId]);
+    const fetchCart = cartService.fetch;
+    fetchCart(userId, Authorization, setCartItems);
+  }, []);
 
   // post user cart
-  useSyncCart({ userId, cart, cookieState });
+  // useSyncCart({ userId, cart, cookieState });
 
   return (
     <Box
