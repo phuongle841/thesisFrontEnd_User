@@ -2,12 +2,18 @@
 
 # Functions:
 
-- user login form
+- user login form ✓
+- user sign up
 - user checkout
 - search function ✓
 - today deal
 - customer service form
-- cart page
+- cart page ✓
+- cart functions:
+  - add items // update logic to cartContext, only it can call cartService
+  - remove items
+  - both have to auto update to to server
+- order function
 - order page
 
 # error in login logic

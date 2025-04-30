@@ -1,58 +1,26 @@
-import { useContext, useEffect, useState } from "react";
+import { useContext, useEffect, useId, useState } from "react";
 import { getCookieValue } from "../utils/Cookies";
 import NavBar from "./NavBar";
 import NavBarShopping from "./NavBar_Shopping";
 import NavFooter from "./NavFooter";
-import {
-  Box,
-  Button,
-  Container,
-  Divider,
-  Skeleton,
-  Typography,
-} from "@mui/material";
+import { Box, Button, Container, Divider, Typography } from "@mui/material";
 import { UserContext } from "../context/userContext";
 import SearchIcon from "@mui/icons-material/Search";
 import CartContainer from "./CartContainer";
 import { CartContext } from "../context/cartContext";
-import { Router, Link as RouterLink } from "react-router-dom";
-import { Link } from "@mui/material";
+import { Link as RouterLink } from "react-router-dom";
+import orderService from "../services/orderService";
+import cartService from "../services/cartService";
+import { OrderContext } from "../context/orderContext";
 function Cart() {
+  // how about set a use state here, every time remove the thing will change
+  // and the popup go up
   const { userId } = useContext(UserContext);
   const { cart } = useContext(CartContext);
-
-  const [orderState, setOrderState] = useState(false);
-  const cookieState = getCookieValue("Authorization");
-  useEffect(() => {
-    let ignore = false;
-    if (userId != null && orderState == true) {
-      const data = cart.map((e) => e.productId);
-      fetch(`http://localhost:3000/users/${userId}/orders`, {
-        mode: "cors",
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-          Authorization: cookieState,
-        },
-        body: JSON.stringify({ data: data }),
-      })
-        .then((response) => {
-          return response.json();
-        })
-        .then((response) => {
-          if (ignore == false) {
-            // todo
-          }
-        })
-        .catch((error) => console.error(error));
-    }
-    return () => {
-      ignore = true;
-    };
-  }, [orderState]);
+  const { orders, order } = useContext(OrderContext);
 
   function handleOrder() {
-    setOrderState(true);
+    order(cart);
   }
 
   return (

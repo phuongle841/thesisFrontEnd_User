@@ -1,15 +1,23 @@
-import { Card, CardHeader, CardMedia, Typography } from "@mui/material";
+import { Card, CardMedia, Typography } from "@mui/material";
 import { Link as RouterLink } from "react-router-dom";
 
 function Panel({ item }) {
-  const { productId, productImages, productName } = item;
+  const { categoryId, categoryImage, categoryTitle } = item;
 
-  const img = productImages[0];
-  const title = productName;
-  const link = "/category/" + productId;
+  const img = categoryImage;
+  const title = categoryTitle;
+  const link = "/category/" + categoryId;
 
   return (
-    <Card sx={{ padding: 2, height: "min-content" }}>
+    <Card
+      sx={{
+        padding: 2,
+        height: "100%",
+        display: "flex",
+        flexDirection: "column",
+        justifyContent: "space-between",
+      }}
+    >
       <Typography component={RouterLink} to={link} padding={1}>
         {title}
       </Typography>

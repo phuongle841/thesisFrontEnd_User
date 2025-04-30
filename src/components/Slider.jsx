@@ -7,8 +7,8 @@ function Slider(pros) {
       {pros.data.map((item) => {
         return (
           <SliderCell
-            key={item.productName}
-            link={item.productImages[0]}
+            key={item.categoryTitle}
+            link={item.categoryImage}
           ></SliderCell>
         );
       })}

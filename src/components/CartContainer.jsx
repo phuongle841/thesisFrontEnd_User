@@ -7,30 +7,24 @@ import { delay } from "../utils/Delay";
 function CartBox({ item, i }) {
   const [amount, setAmount] = useState(item.quantity ? item.quantity : 1);
 
-  var timeout;
   const [open, setOpen] = useState(false);
 
-  const { productId } = item;
   const { removeCartItem } = useContext(CartContext);
 
   return (
     <>
       <div className="CartBox">
         <div className="CartBox-left">
-          <h1>{i}</h1>
+          <h1>
+            {i + 1} - {item.recordProduct.productId}
+          </h1>
           <h3>{item.recordProduct.productName}</h3>
           <p>Amount: {amount}</p>
         </div>
         <div className="CartBox-right">
           <Button
-            onClick={async () => {
-              setOpen(true);
-              clearTimeout(timeout);
-              await delay(2000);
-              removeCartItem(productId);
-              timeout = setTimeout(function () {
-                setOpen(false);
-              }, 2000);
+            onClick={() => {
+              removeCartItem(item.recordProduct);
             }}
           >
             remove

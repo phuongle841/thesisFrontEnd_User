@@ -4,53 +4,12 @@ import Panel from "./Panel";
 import Panel4Component from "./Panel4Component";
 import Slides from "./Slides";
 import { Skeleton } from "@mui/material";
+import CategoryService from "../services/CategoryService";
 function ProductPanel() {
-  const [mainData, setMainData] = useState(null);
-  const url = "http://localhost:3000/categories";
-
-  const fetchCategories = async () => {
-    await fetch(url, { mode: "cors" })
-      .then((response) => response.json())
-      .then((response) => {
-        if (!ignore) {
-          const data = response.map((element) => {
-            const { categoryImage, categoryTitle, categoryId } = element;
-
-            return {
-              productImages: [categoryImage],
-              productName: categoryTitle,
-              productId: categoryId,
-            };
-          });
-          setMainData(data);
-        }
-      })
-      .catch((error) => console.error(error));
-  };
-
+  const [data, setData] = useState(null);
   useEffect(() => {
-    let ignore = false;
-    fetch(url, { mode: "cors" })
-      .then((response) => response.json())
-      .then((response) => {
-        if (!ignore) {
-          const data = response.map((element) => {
-            const { categoryImage, categoryTitle, categoryId } = element;
-
-            return {
-              productImages: [categoryImage],
-              productName: categoryTitle,
-              productId: categoryId,
-            };
-          });
-          setMainData(data);
-        }
-      })
-      .catch((error) => console.error(error));
-
-    return () => {
-      ignore = true;
-    };
+    const fetchCategories = CategoryService.fetchBatch;
+    fetchCategories(setData);
   }, []);
 
   return (
@@ -62,9 +21,9 @@ function ProductPanel() {
         />
       </div>
       <div className="Panels">
-        {mainData ? (
-          mainData.map((item) => {
-            return <Panel item={item} key={item.productId}></Panel>;
+        {data ? (
+          data.map((item) => {
+            return <Panel item={item} key={item.categoryId}></Panel>;
           })
         ) : (
           <Skeleton></Skeleton>
@@ -72,11 +31,8 @@ function ProductPanel() {
 
         {/* <Panel4Component data={data}></Panel4Component> */}
       </div>
-      {mainData != null ? (
-        <Slides
-          title={"Related to items you've viewed"}
-          data={mainData}
-        ></Slides>
+      {data != null ? (
+        <Slides title={"Related to items you've viewed"} data={data}></Slides>
       ) : (
         // not displayed properly
         <div style={{ display: "flex", width: "100%" }}>

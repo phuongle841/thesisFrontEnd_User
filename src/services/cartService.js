@@ -15,8 +15,8 @@ const cartService = {
       })
       .catch((error) => console.error(error));
   },
-  update: async function (userId, Authorization, ignore, data) {
-    await fetch(`http://localhost:3000/users/${userId}/orders`, {
+  update: async function (userId, Authorization, data) {
+    await fetch(`http://localhost:3000/users/${userId}/cart`, {
       mode: "cors",
       method: "PUT",
       headers: {
@@ -26,11 +26,11 @@ const cartService = {
       body: JSON.stringify({ data: data }),
     })
       .then((response) => {
-        if (!ignore) {
-          return response.json();
-        }
+        return response.json();
       })
-      .then((response) => {})
+      .then((response) => {
+        // set notification?
+      })
       .catch((error) => console.error(error));
   },
 };

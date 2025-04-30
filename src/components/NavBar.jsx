@@ -13,23 +13,19 @@ import { deleteCookie, getCookieValue } from "../utils/Cookies";
 import { UserContext } from "../context/userContext";
 import { useNavigate } from "react-router-dom";
 import { CartContext } from "../context/cartContext";
-import useSyncCart from "../hooks/useSyncCart";
-import cartService from "../services/cartService";
-import userService from "../services/userService";
+import AuthorizationContext from "../context/authorizationContext";
 
 function NavBar() {
   const navigate = useNavigate();
   const { userId, setUserId } = useContext(UserContext);
   const { cart, setCartItems } = useContext(CartContext);
-
-  const Authorization = getCookieValue("Authorization");
+  const { authorization, removeAuthorization } =
+    useContext(AuthorizationContext);
 
   const [anchorElUser, setAnchorElUser] = useState(null);
 
   function logout() {
-    deleteCookie("Authorization");
-    setUserId(null);
-    setCartItems([]);
+    removeAuthorization();
     navigate("/login");
   }
 
@@ -42,32 +38,13 @@ function NavBar() {
       callBack: logout,
     },
   ];
+
   const handleOpenUserMenu = (event) => {
     setAnchorElUser(event.currentTarget);
   };
   const handleCloseUserMenu = () => {
     setAnchorElUser(null);
   };
-
-  useEffect(() => {
-    if (Authorization == "") {
-      return;
-    }
-    let authentication = userService.authenticate;
-    authentication(Authorization, setUserId);
-  }, []);
-
-  // set cart context
-  useEffect(() => {
-    if (userId == null) {
-      return;
-    }
-    const fetchCart = cartService.fetch;
-    fetchCart(userId, Authorization, setCartItems);
-  }, []);
-
-  // post user cart
-  // useSyncCart({ userId, cart, cookieState });
 
   return (
     <Box
