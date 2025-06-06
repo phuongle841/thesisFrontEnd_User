@@ -10,7 +10,9 @@ function Profile_ReviewContainer({ reviews }) {
           return (
             <Card
               key={i}
-              sx={{ border: "1px solid #000" }}
+              sx={{
+                border: "1px solid #000",
+              }}
               component={RouterLink}
               to={link}
             >

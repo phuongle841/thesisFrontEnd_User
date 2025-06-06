@@ -9,7 +9,6 @@ import { Badge, Box, Button, Menu } from "@mui/material";
 import Asynchronous from "./AsynchronousSearchBar";
 import DirectoryLink from "./DirectoryLink";
 import { DirectoryLinkSetting } from "./DirectoryLink";
-import { deleteCookie, getCookieValue } from "../utils/Cookies";
 import { UserContext } from "../context/userContext";
 import { useNavigate } from "react-router-dom";
 import { CartContext } from "../context/cartContext";
@@ -17,21 +16,25 @@ import AuthorizationContext from "../context/authorizationContext";
 
 function NavBar() {
   const navigate = useNavigate();
-  const { userId, setUserId } = useContext(UserContext);
+  const { userId, setUserId, removeUserId } = useContext(UserContext);
   const { cart, setCartItems } = useContext(CartContext);
   const { authorization, removeAuthorization } =
     useContext(AuthorizationContext);
-
   const [anchorElUser, setAnchorElUser] = useState(null);
 
   function logout() {
     removeAuthorization();
+    removeUserId();
     navigate("/login");
   }
 
   const settings = [
     { setting: "profile", link: `/profile/${userId}`, callBack: () => {} },
-    { setting: "dashboard", link: "/", callBack: () => {} },
+    {
+      setting: "dashboard",
+      link: "http://localhost:5174/",
+      callBack: () => {},
+    },
     {
       setting: "logout",
       link: "",
@@ -59,7 +62,7 @@ function NavBar() {
         icon={<HomeIcon></HomeIcon>}
       ></DirectoryLink>
       <DirectoryLink
-        link={userId ? `/location/${userId}` : `/login`}
+        link={userId ? `/location` : `/login`}
         buttonValue={"Delivery to VietNam"}
         icon={<LocationOnIcon></LocationOnIcon>}
       ></DirectoryLink>
@@ -69,13 +72,13 @@ function NavBar() {
       </Box>
 
       <DirectoryLink
-        link={userId ? `/order/${userId}` : `/login`}
+        link={userId ? `/order` : `/login`}
         buttonValue={"Return & Order"}
         icon={<AirportShuttleIcon></AirportShuttleIcon>}
       ></DirectoryLink>
 
       <DirectoryLink
-        link={userId ? `/cart/${userId}` : `/login`}
+        link={userId ? `/cart` : `/login`}
         buttonValue={"Cart"}
         icon={
           <Badge badgeContent={cart.length} color="primary" size={"small"}>

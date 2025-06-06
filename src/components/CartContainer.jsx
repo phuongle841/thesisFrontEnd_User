@@ -3,24 +3,56 @@ import PropTypes from "prop-types";
 import { Box, Button, Divider, Snackbar } from "@mui/material";
 import { useContext, useState } from "react";
 import { CartContext } from "../context/cartContext";
-import { delay } from "../utils/Delay";
-function CartBox({ item, i }) {
-  const [amount, setAmount] = useState(item.quantity ? item.quantity : 1);
 
+function CartBox({ item, i }) {
+  const [quantity, setQuantity] = useState(item.quantity ? item.quantity : 1);
+  const { updateCartItem, removeCartItem } = useContext(CartContext);
   const [open, setOpen] = useState(false);
 
-  const { removeCartItem } = useContext(CartContext);
+  function handleQuantityOnChange(event) {
+    setQuantity(event.target.value);
+  }
+  function onSave() {
+    // not sure to update to server here or update to server in main.jsx
+    item.quantity = quantity;
+    updateCartItem(item);
+  }
+  function onDiscard() {
+    setQuantity(item.quantity);
+  }
 
   return (
     <>
       <div className="CartBox">
-        <div className="CartBox-left">
+        <div className="CartBox-left" style={{ flex: "auto" }}>
           <h1>
             {i + 1} - {item.recordProduct.productId}
           </h1>
           <h3>{item.recordProduct.productName}</h3>
-          <p>Amount: {amount}</p>
+          <input
+            type="number"
+            name="quantity"
+            className="quantity"
+            value={quantity}
+            onChange={handleQuantityOnChange}
+          />
+          {quantity != item.quantity && (
+            <>
+              <button onClick={onSave}>Save</button>
+              <button onClick={onDiscard}>Discard</button>
+            </>
+          )}
         </div>
+        <Box className="CartBox-mid">
+          <Box sx={{}}>
+            <img
+              src={item.recordProduct.productImages[0]}
+              alt=""
+              width={"100px"}
+              height={"100px"}
+            />
+          </Box>
+        </Box>
         <div className="CartBox-right">
           <Button
             onClick={() => {
@@ -58,7 +90,5 @@ function CartContainer({ data }) {
     </>
   );
 }
-
-CartContainer.PropTypes = { data: PropTypes.arrayOf(PropTypes.object) };
 
 export default CartContainer;

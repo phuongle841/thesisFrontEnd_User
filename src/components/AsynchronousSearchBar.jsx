@@ -4,6 +4,7 @@ import Autocomplete from "@mui/material/Autocomplete";
 import CircularProgress from "@mui/material/CircularProgress";
 import { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
+import searchService from "../services/searchService";
 
 export default function Asynchronous() {
   const [query, setQuery] = React.useState("");
@@ -28,20 +29,8 @@ export default function Asynchronous() {
 
   const loadData = useEffect(() => {
     if (open == true) {
-      let ignore = false;
-      fetch(`http://localhost:3000/search?product=${query}`, {
-        mode: "cors",
-      })
-        .then((response) => response.json())
-        .then((response) => {
-          if (ignore == false) {
-            setOptions([...response]);
-          }
-        })
-        .catch((error) => console.error(error));
-      return () => {
-        ignore = true;
-      };
+      const fetchOptions = searchService.fetch;
+      fetchOptions(query, setOptions);
     }
   }, [query]);
 
@@ -77,9 +66,8 @@ export default function Asynchronous() {
             label="Search"
             onKeyDown={(event) => {
               if (event.key === "Enter" && query.trim() !== "") {
-                console.log(query);
                 try {
-                  navigate(`/search/${encodeURIComponent(query)}`);
+                  navigate(`/search/?query=${encodeURIComponent(query)}`);
                 } catch (error) {
                   console.log(error);
                 }

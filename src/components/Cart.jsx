@@ -1,5 +1,4 @@
-import { useContext, useEffect, useId, useState } from "react";
-import { getCookieValue } from "../utils/Cookies";
+import { useContext, useState } from "react";
 import NavBar from "./NavBar";
 import NavBarShopping from "./NavBar_Shopping";
 import NavFooter from "./NavFooter";
@@ -10,17 +9,19 @@ import CartContainer from "./CartContainer";
 import { CartContext } from "../context/cartContext";
 import { Link as RouterLink } from "react-router-dom";
 import orderService from "../services/orderService";
-import cartService from "../services/cartService";
-import { OrderContext } from "../context/orderContext";
+import AuthorizationContext from "../context/authorizationContext";
 function Cart() {
   // how about set a use state here, every time remove the thing will change
   // and the popup go up
   const { userId } = useContext(UserContext);
-  const { cart } = useContext(CartContext);
-  const { orders, order } = useContext(OrderContext);
+  const { authorization } = useContext(AuthorizationContext);
+  const { cart, setCartItems } = useContext(CartContext);
+  const [feedback, setFeedback] = useState("");
 
   function handleOrder() {
-    order(cart);
+    const order = orderService.order;
+    order(userId, authorization, cart, setFeedback);
+    setCartItems("");
   }
 
   return (

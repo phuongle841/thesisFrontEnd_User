@@ -8,7 +8,6 @@ import { ThemeProvider } from "@mui/material";
 import theme from "./styles/themes.jsx";
 import { CartContext } from "./context/cartContext.jsx";
 import { UserContext } from "./context/userContext.jsx";
-import { OrderContext } from "./context/orderContext.jsx";
 import AuthorizationContext from "./context/authorizationContext.jsx";
 import { deleteCookie, getCookieValue } from "./utils/Cookies.js";
 import userService from "./services/userService.js";
@@ -18,13 +17,16 @@ const router = createBrowserRouter(indexRoute);
 
 // todo: later refactor to separate module
 export default function ConTextSetUp() {
-  const Authorization = getCookieValue("Authorization");
-
   const [userId, setUserID] = useState(null);
 
   function setUserId(userId) {
     setUserID(userId);
   }
+
+  function removeUserId() {
+    setUserID(null);
+  }
+
   // set authorization context
   const [authorization, setAuthorization] = useState(
     getCookieValue("Authorization")
@@ -32,13 +34,13 @@ export default function ConTextSetUp() {
 
   function removeAuthorization() {
     deleteCookie("Authorization");
-    setUserId(null);
     setCartItems([]);
   }
 
   const [cart, setCart] = useState([]);
 
   function addCartItems(newCartItem) {
+    // need function check if item already in cart
     const newItems = [...cart];
     newItems.push(newCartItem);
     setCart(newItems);
@@ -52,17 +54,36 @@ export default function ConTextSetUp() {
     const newItems = cart.filter(
       (e) => e.recordProduct.productId != cartItem.productId
     );
+    postCart(newItems);
+    setCartItems(newItems);
+  }
+
+  function updateCartItem(cartItem) {
+    const { productId } = cartItem.recordProduct;
+    const { quantity } = cartItem;
+    console.log(productId, quantity);
+
+    const newItems = cart.map((e) => {
+      if (e.recordProduct.productId == productId) {
+        e.quantity = quantity;
+      }
+      return e;
+    });
+    postCart(newItems);
+    setCartItems(newItems);
+  }
+
+  function postCart(newItems) {
     const updateCart = cartService.update;
     updateCart(userId, authorization, newItems);
-    setCart(newItems);
   }
 
   useEffect(() => {
-    if (Authorization == "") {
+    if (authorization == "") {
       return;
     }
     let authentication = userService.authenticate;
-    authentication(Authorization, setUserId);
+    authentication(authorization, setUserId);
   }, []);
 
   useEffect(() => {
@@ -70,58 +91,27 @@ export default function ConTextSetUp() {
       return;
     }
     const fetchCart = cartService.fetch;
-    fetchCart(userId, Authorization, setCartItems);
+    fetchCart(userId, authorization, setCartItems);
   }, [userId]);
-
-  useEffect(() => {
-    if (userId == null) {
-      return;
-    }
-    const fetchOrders = orderService.fetch;
-    fetchOrders(userId, authorization, addOrderItems);
-  }, [userId]);
-
-  const [orders, setOrders] = useState([]);
-
-  function order(order) {
-    // update to zero cart first
-    const updateCart = cartService.update;
-    updateCart(userId, authorization, []);
-    const updateOrder = orderService.order;
-    updateOrder(userId, authorization, order, () => {
-      console.log("working");
-      // but the amazon is separate teh cart into multiples orders
-      //
-    });
-    // then update order
-    // then update the current cart
-    // how about update order?
-    setCart([]);
-  }
-
-  function addOrderItems(value) {
-    setOrders(value);
-  }
-  function removeOrderItems(value) {
-    setOrders(value);
-  }
 
   return (
     <AuthorizationContext.Provider
       value={{ authorization, setAuthorization, removeAuthorization }}
     >
-      <UserContext.Provider value={{ userId, setUserId }}>
-        <OrderContext.Provider
-          value={{ orders, addOrderItems, removeOrderItems, order }}
+      <UserContext.Provider value={{ userId, setUserId, removeUserId }}>
+        <CartContext.Provider
+          value={{
+            cart,
+            addCartItems,
+            setCartItems,
+            removeCartItem,
+            updateCartItem,
+          }}
         >
-          <CartContext.Provider
-            value={{ cart, addCartItems, setCartItems, removeCartItem }}
-          >
-            <ThemeProvider theme={theme}>
-              <RouterProvider router={router}></RouterProvider>
-            </ThemeProvider>
-          </CartContext.Provider>
-        </OrderContext.Provider>
+          <ThemeProvider theme={theme}>
+            <RouterProvider router={router}></RouterProvider>
+          </ThemeProvider>
+        </CartContext.Provider>
       </UserContext.Provider>
     </AuthorizationContext.Provider>
   );

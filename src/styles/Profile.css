@@ -1,0 +1,10 @@
+.editBox {
+  display: flex;
+}
+.editBox > #editButton {
+  padding: 10px;
+  margin: 10px;
+  border-radius: 5px;
+  align-self: flex-end;
+  display: flex;
+}

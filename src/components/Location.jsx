@@ -2,7 +2,7 @@ import { Box, Container } from "@mui/material";
 import NavBar from "./NavBar";
 import NavBarShopping from "./NavBar_Shopping";
 import NavFooter from "./NavFooter";
-import { useContext, useEffect, useState } from "react";
+import { useContext, useEffect, useId, useState } from "react";
 import { UserContext } from "../context/userContext";
 import { getCookieValue } from "../utils/Cookies";
 import locationService from "../services/locationService";
@@ -11,7 +11,7 @@ function Location() {
   const { userId } = useContext(UserContext);
   const Authorization = getCookieValue("Authorization");
   useEffect(() => {
-    if (Authorization == "") {
+    if (!useId) {
       return;
     }
     const fetchLocation = locationService.fetch;
@@ -27,7 +27,9 @@ function Location() {
         flex={"auto"}
         display={"flex"}
         flexDirection={"column"}
-      ></Box>
+      >
+        {data != null && <p>{data.location}</p>}
+      </Box>
       <NavFooter></NavFooter>
     </>
   );

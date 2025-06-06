@@ -4,7 +4,7 @@ import PriceSpan from "./PriceSpan";
 import moment from "moment";
 import { CartContext } from "../context/cartContext";
 import { useParams } from "react-router-dom";
-function OrderPanel() {
+function OrderPanel({ data }) {
   const { cart, addCartItems } = useContext(CartContext);
   const { id } = useParams();
 
@@ -34,7 +34,7 @@ function OrderPanel() {
           <button
             id="add-to-cart"
             onClick={() => {
-              addCartItems(id);
+              addCartItems(data);
             }}
           >
             Add to cart

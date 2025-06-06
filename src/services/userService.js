@@ -8,14 +8,16 @@ const userService = {
         return response.json();
       })
       .then((response) => {
-        setData(response.userId);
+        setData(response.userId.UserId);
       })
       .catch((error) => console.error(error));
   },
-  fetch: async (userId, Authorization, ignore, setData) => {
+  fetch: async (userId, setData) => {
     fetch(`http://localhost:3000/users/${userId}`, { mode: "cors" })
       .then((response) => response.json())
       .then((response) => {
+        console.log(response);
+
         setData(response);
       })
       .catch((error) => console.error(error));

@@ -16,6 +16,7 @@ import { useNavigate } from "react-router-dom";
 import { useContext } from "react";
 import { setCookie } from "../utils/Cookies";
 import { UserContext } from "../context/userContext";
+import AuthorizationContext from "../context/authorizationContext";
 export default function LoginPage() {
   // use history to ref to prev page
   const [emailError, setEmailError] = React.useState(false);
@@ -24,6 +25,7 @@ export default function LoginPage() {
   const [passwordErrorMessage, setPasswordErrorMessage] = React.useState("");
   const [authError, setAuthError] = React.useState("");
   const { setUserId } = useContext(UserContext);
+  const { setAuthorization } = useContext(AuthorizationContext);
   const navigate = useNavigate();
 
   const handleSubmit = (event) => {
@@ -52,10 +54,11 @@ export default function LoginPage() {
         setAuthError("cannot authenticate users");
       } else {
         // set token into local storage
-        const { token, userId } = content;
-        const url = `/profile/${userId.userId}`;
+        const { token, credentials } = content;
         setCookie("Authorization", "Bearer " + token);
-        setUserId(userId.userId);
+        setAuthorization("Bearer " + token);
+        // set Authorization
+        setUserId(credentials.UserId);
         navigate("/");
       }
     })();

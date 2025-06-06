@@ -1,6 +1,6 @@
 const cartService = {
   fetch: async function (userId, Authorization, setData) {
-    await fetch(`http://localhost:3000/users/${userId}/cart`, {
+    await fetch(`http://localhost:3000/cart/${userId}`, {
       mode: "cors",
       headers: {
         Authorization: Authorization,
@@ -13,7 +13,9 @@ const cartService = {
         const { cartRecord } = response;
         setData(cartRecord);
       })
-      .catch((error) => console.error(error));
+      .catch((error) => {
+        console.error(error);
+      });
   },
   update: async function (userId, Authorization, data) {
     await fetch(`http://localhost:3000/users/${userId}/cart`, {

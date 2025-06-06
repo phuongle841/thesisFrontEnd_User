@@ -9,7 +9,10 @@ import SignUpPage from "../components/SignUpPage";
 import Profile from "../components/Profile";
 import Order from "../components/Order";
 import Location from "../components/Location";
-import SearchPage from "../components/SearchBar";
+import SearchPage from "../pages/Search/SearchBar";
+import { Children } from "react";
+import ProfileSetting from "../pages/Profile/SettingPage";
+import ProfileIndex from "../pages/Profile/IndexPage";
 const indexRoute = [
   {
     path: "/",
@@ -32,20 +35,24 @@ const indexRoute = [
     path: "/signup",
     element: <SignUpPage></SignUpPage>,
   },
-  { path: "/cart/:id", element: <Cart></Cart> },
+  { path: "/cart", element: <Cart></Cart> },
   {
     path: "/profile/:id",
     element: <Profile></Profile>,
+    children: [
+      { path: "", element: <ProfileIndex></ProfileIndex> },
+      { path: "setting", element: <ProfileSetting></ProfileSetting> },
+    ],
   },
   {
-    path: "/order/:id",
+    path: "/order",
     element: <Order></Order>,
   },
   {
-    path: "/location/:id",
+    path: "/location",
     element: <Location></Location>,
   },
-  { path: "/search/:context", element: <SearchPage></SearchPage> },
+  { path: "/search", element: <SearchPage></SearchPage> },
 ];
 
 export default indexRoute;

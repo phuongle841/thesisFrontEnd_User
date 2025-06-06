@@ -1,4 +1,5 @@
 import "../styles/ProductContainer.css";
+import CommentSection from "./CommentSection";
 import DescriptionPanel from "./DescriptionPanel";
 import ImagePreviewPanel from "./ImagePreviewPanel";
 import OrderPanel from "./OrderPanel";
@@ -7,7 +8,8 @@ function ProductContainer({ data }) {
     <div className="ProductContainer">
       <ImagePreviewPanel data={data.productImages}></ImagePreviewPanel>
       <DescriptionPanel data={data}></DescriptionPanel>
-      <OrderPanel></OrderPanel>
+      <OrderPanel data={data}></OrderPanel>
+      <CommentSection data={data}></CommentSection>
     </div>
   );
 }
