@@ -13,6 +13,8 @@ import Badge from "./Badge";
 import { useContext } from "react";
 import { CartContext } from "../context/cartContext";
 function ProductCell({ data }) {
+  console.log(data);
+
   const { addCartItems } = useContext(CartContext);
 
   const link = `/product/${data.productId}`;

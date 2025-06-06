@@ -10,7 +10,7 @@ const searchService = {
         return response.json();
       })
       .then((response) => {
-        setData(response);
+        setData([...response]);
       })
       .catch((error) => console.error(error));
   },
