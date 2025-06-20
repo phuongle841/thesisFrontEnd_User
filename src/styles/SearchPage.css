@@ -1,0 +1,8 @@
+#SearchPageContainer {
+  flex: auto;
+  display: grid;
+  padding: var(--padding-default);
+  padding-left: var(--padding-custom);
+  padding-right: var(--padding-custom);
+  grid-template-columns: 1fr 6fr;
+}

@@ -1,4 +1,4 @@
-import { Skeleton } from "@mui/material";
+import { Box, Container, Skeleton } from "@mui/material";
 import CategoriesProductPanel from "../../components/CategoriesProductPanel";
 import NavBar from "../../components/NavBar";
 import NavBarShopping from "../../components/NavBar_Shopping";
@@ -8,14 +8,15 @@ import { useEffect, useState } from "react";
 import searchService from "../../services/searchService";
 import { useLocation, useParams, useSearchParams } from "react-router-dom";
 import ProductCell from "../../components/ProductCell";
+import FilterMenu from "../../components/FilterMenu";
+
+import "../../styles/SearchPage.css";
 
 function SearchPage() {
   const [data, setData] = useState();
 
   const [searchParams] = useSearchParams();
   const query = searchParams.get("query");
-
-  console.log(data != null ? data : "still fetching");
 
   useEffect(() => {
     const fetchCategory = searchService.fetch;
@@ -28,13 +29,16 @@ function SearchPage() {
       <ResultDisplayBar></ResultDisplayBar>
       {data ? (
         <>
-          <div className="CategoryContainer">
-            {data.map((data) => {
-              return (
-                <ProductCell key={data.productId} data={data}></ProductCell>
-              );
-            })}
-          </div>
+          <Box component={Container} id="SearchPageContainer">
+            <FilterMenu></FilterMenu>
+            <div className="CategoryContainer">
+              {data.map((data) => {
+                return (
+                  <ProductCell key={data.productId} data={data}></ProductCell>
+                );
+              })}
+            </div>
+          </Box>
         </>
       ) : (
         <Skeleton></Skeleton>

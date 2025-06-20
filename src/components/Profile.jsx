@@ -18,7 +18,8 @@ function Profile() {
     if (!id) return;
     const fetchUser = userService.fetch;
     fetchUser(id, setUserInformation);
-  }, []);
+  }, [id]);
+
   return (
     <>
       <UserDataContext value={{ user }}>

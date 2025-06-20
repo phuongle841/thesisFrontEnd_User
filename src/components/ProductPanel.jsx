@@ -3,7 +3,7 @@ import "../styles/ProductPanel.css";
 import Panel from "./Panel";
 import Panel4Component from "./Panel4Component";
 import Slides from "./Slides";
-import { Skeleton } from "@mui/material";
+import { Box, Container, Skeleton } from "@mui/material";
 import CategoryService from "../services/CategoryService";
 function ProductPanel() {
   const [data, setData] = useState(null);
@@ -13,7 +13,7 @@ function ProductPanel() {
   }, []);
 
   return (
-    <div className="ProductPanel">
+    <Box className="ProductPanel">
       <div className="MainAdvertisement">
         <img
           src="https://m.media-amazon.com/images/I/61lwJy4B8PL._SX3000_.jpg"
@@ -44,7 +44,7 @@ function ProductPanel() {
           ></Skeleton>
         </div>
       )}
-    </div>
+    </Box>
   );
 }
 export default ProductPanel;

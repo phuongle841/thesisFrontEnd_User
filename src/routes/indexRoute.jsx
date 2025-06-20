@@ -9,8 +9,7 @@ import SignUpPage from "../components/SignUpPage";
 import Profile from "../components/Profile";
 import Order from "../components/Order";
 import Location from "../components/Location";
-import SearchPage from "../pages/Search/SearchBar";
-import { Children } from "react";
+import SearchPage from "../pages/Search/SearchPage";
 import ProfileSetting from "../pages/Profile/SettingPage";
 import ProfileIndex from "../pages/Profile/IndexPage";
 const indexRoute = [

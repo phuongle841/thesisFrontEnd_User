@@ -7,7 +7,7 @@ const cartService = {
       },
     })
       .then((response) => {
-        return response.json();
+        return response.clone().json();
       })
       .then((response) => {
         const { cartRecord } = response;

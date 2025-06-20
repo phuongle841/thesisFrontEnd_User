@@ -55,6 +55,8 @@ export default function LoginPage() {
       } else {
         // set token into local storage
         const { token, credentials } = content;
+        console.log(credentials);
+
         setCookie("Authorization", "Bearer " + token);
         setAuthorization("Bearer " + token);
         // set Authorization

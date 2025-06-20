@@ -16,8 +16,6 @@ const userService = {
     fetch(`http://localhost:3000/users/${userId}`, { mode: "cors" })
       .then((response) => response.json())
       .then((response) => {
-        console.log(response);
-
         setData(response);
       })
       .catch((error) => console.error(error));

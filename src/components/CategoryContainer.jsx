@@ -3,7 +3,6 @@ import ProductCell from "./ProductCell";
 
 function CategoryContainer({ data }) {
   const { product } = data;
-  console.log(data);
 
   return (
     <>

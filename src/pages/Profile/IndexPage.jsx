@@ -12,12 +12,14 @@ import Profile_ReviewContainer from "../../components/Profile_ReviewContainer";
 import EditIcon from "@mui/icons-material/Edit";
 
 import { useContext, useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
-import userService from "../../services/userService";
+
 import { UserDataContext } from "../../components/Profile";
+import { UserContext } from "../../context/userContext";
 
 function ProfileIndex() {
   const { user } = useContext(UserDataContext);
+  const { userId } = useContext(UserContext);
+
   return (
     <>
       <Box
@@ -52,13 +54,15 @@ function ProfileIndex() {
                   </Box>
                 </Box>
                 <Box sx={{ flex: "auto" }}></Box>
-                <Box id={"editButton"}>
-                  <DirectoryLink
-                    link={"setting"}
-                    buttonValue={"Edit profile"}
-                    icon={<EditIcon></EditIcon>}
-                  ></DirectoryLink>
-                </Box>
+                {user.userId == userId && (
+                  <Box id={"editButton"}>
+                    <DirectoryLink
+                      link={"setting"}
+                      buttonValue={"Edit profile"}
+                      icon={<EditIcon></EditIcon>}
+                    ></DirectoryLink>
+                  </Box>
+                )}
               </Box>
             </Card>
             <Profile_ReviewContainer
