@@ -13,7 +13,6 @@ function LocationList({ locations }) {
   return (
     <Box>
       {locations.map((element) => {
-        console.log(element);
         return (
           <Box key={element.locationId}>
             <span>{element.address}</span>
@@ -40,7 +39,6 @@ function Location() {
     const fetchLocation = locationService.fetch;
     fetchLocation(userId, Authorization, setData);
   }, []);
-  console.log(data);
 
   return (
     <>

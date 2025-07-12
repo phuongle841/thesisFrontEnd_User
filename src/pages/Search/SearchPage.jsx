@@ -29,7 +29,7 @@ function SearchPage() {
       <ResultDisplayBar></ResultDisplayBar>
       {data ? (
         <>
-          <Box component={Container} id="SearchPageContainer">
+          <Box /*component={Container}*/ id="SearchPageContainer">
             <FilterMenu></FilterMenu>
             <div className="CategoryContainer">
               {data.map((data) => {

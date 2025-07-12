@@ -54,13 +54,14 @@ export default function LoginPage() {
         setAuthError("cannot authenticate users");
       } else {
         // set token into local storage
-        const { token, credentials } = content;
-        console.log(credentials);
+        const { token, UserId } = content;
+
+        console.log(token);
 
         setCookie("Authorization", "Bearer " + token);
         setAuthorization("Bearer " + token);
         // set Authorization
-        setUserId(credentials.UserId);
+        setUserId(UserId);
         navigate("/");
       }
     })();

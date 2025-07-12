@@ -28,8 +28,6 @@ function ProductPanel() {
         ) : (
           <Skeleton></Skeleton>
         )}
-
-        {/* <Panel4Component data={data}></Panel4Component> */}
       </div>
       {data != null ? (
         <Slides title={"Related to items you've viewed"} data={data}></Slides>

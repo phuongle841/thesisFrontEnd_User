@@ -8,7 +8,7 @@ const userService = {
         return response.json();
       })
       .then((response) => {
-        setData(response.userId.UserId);
+        setData(response.userId);
       })
       .catch((error) => console.error(error));
   },
@@ -20,6 +20,24 @@ const userService = {
       })
       .catch((error) => console.error(error));
   },
-  update: async (userId, Authorization, ignore, setData) => {},
+  update: async (userId, Authorization, data, setData) => {
+    await fetch(`http://localhost:3000/users/${userId}/`, {
+      mode: "cors",
+      method: "PUT",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: Authorization,
+      },
+      body: JSON.stringify({ user: data }),
+    })
+      .then((response) => {
+        return response.json();
+      })
+      .then((response) => {
+        // set notification?
+        setData("success");
+      })
+      .catch((error) => console.error(error));
+  },
 };
 export default userService;
