@@ -25,14 +25,17 @@ function CartBox({ item, i }) {
     <>
       <div className="CartBox">
         <div className="CartBox-left" style={{ flex: "auto" }}>
-          <h1>
-            {i + 1} - {item.recordProduct.productId}
-          </h1>
+          <h1>No.{i + 1} </h1>
+          <h3>
+            Product Id: {item.recordProduct.productId} - Price:{" "}
+            {item.recordProduct.productPrice}
+          </h3>
           <h3>{item.recordProduct.productName}</h3>
           <input
             type="number"
             name="quantity"
             className="quantity"
+            min={0}
             value={quantity}
             onChange={handleQuantityOnChange}
           />

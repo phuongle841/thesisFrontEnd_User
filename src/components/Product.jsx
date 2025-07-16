@@ -15,7 +15,7 @@ function Product() {
   useEffect(() => {
     const fetch = productService.fetchProduct;
     fetch(id, SetData);
-  }, []);
+  }, [id]);
 
   return (
     <>

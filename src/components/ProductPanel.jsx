@@ -1,9 +1,8 @@
 import { useEffect, useState } from "react";
 import "../styles/ProductPanel.css";
 import Panel from "./Panel";
-import Panel4Component from "./Panel4Component";
 import Slides from "./Slides";
-import { Box, Container, Skeleton } from "@mui/material";
+import { Box, Skeleton } from "@mui/material";
 import CategoryService from "../services/CategoryService";
 function ProductPanel() {
   const [data, setData] = useState(null);

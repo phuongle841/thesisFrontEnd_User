@@ -1,5 +1,13 @@
-import { useState } from "react";
+import { useContext, useState } from "react";
 import DirectoryLink from "./DirectoryLink";
+import NavFooter from "./NavFooter";
+import NavBar from "./NavBar";
+import NavBarShopping from "./NavBar_Shopping";
+import { Box, colors } from "@mui/material";
+import { setCookie } from "../utils/Cookies";
+import { UserContext } from "../context/userContext";
+import AuthorizationContext from "../context/authorizationContext";
+import { useNavigate } from "react-router-dom";
 
 export default function SignUpPage() {
   const [form, setForm] = useState({
@@ -9,6 +17,9 @@ export default function SignUpPage() {
   });
   const [showPassword, setShowPassword] = useState(false);
   const [status, setStatus] = useState({ error: "", success: "" });
+  const { setUserId } = useContext(UserContext);
+  const { setAuthorization } = useContext(AuthorizationContext);
+  const navigate = useNavigate();
 
   const handleChange = (e) => {
     setForm({ ...form, [e.target.name]: e.target.value });
@@ -37,75 +48,91 @@ export default function SignUpPage() {
       }
 
       setStatus({ success: "Account created successfully!", error: "" });
-      setForm({ username: "", email: "", password: "" });
+
+      const { token, UserId } = result;
+      setCookie("Authorization", "Bearer " + token);
+      setAuthorization("Bearer " + token);
+      // set Authorization
+      setUserId(UserId);
+      navigate("/");
     } catch (err) {
       setStatus({ error: err.message, success: "" });
     }
   };
 
   return (
-    <div style={styles.container}>
-      <form onSubmit={handleSubmit} style={styles.form}>
-        <h2>Create an Account</h2>
+    <Box
+      display={"flex"}
+      flexDirection={"column"}
+      minHeight={"100vh"}
+      justifyContent={"space-between"}
+    >
+      <div>
+        <NavBar></NavBar>
+        <NavBarShopping></NavBarShopping>
+      </div>
+      <div style={styles.container}>
+        <form onSubmit={handleSubmit} style={styles.form}>
+          <h2>Create an Account</h2>
 
-        <input
-          type="text"
-          name="username"
-          placeholder="Username"
-          value={form.username}
-          onChange={handleChange}
-          required
-          style={styles.input}
-        />
-
-        <input
-          type="email"
-          name="email"
-          placeholder="Email"
-          value={form.email}
-          onChange={handleChange}
-          required
-          style={styles.input}
-        />
-
-        <div style={styles.passwordContainer}>
           <input
-            type={showPassword ? "text" : "password"}
-            name="password"
-            placeholder="Password"
-            value={form.password}
+            type="text"
+            name="username"
+            placeholder="Username"
+            value={form.username}
             onChange={handleChange}
             required
-            style={{ ...styles.input, marginBottom: 0 }}
+            style={styles.input}
           />
-          <button
-            type="button"
-            onClick={togglePassword}
-            style={styles.toggleButton}
-          >
-            {showPassword ? "Hide" : "Show"}
+
+          <input
+            type="email"
+            name="email"
+            placeholder="Email"
+            value={form.email}
+            onChange={handleChange}
+            required
+            style={styles.input}
+          />
+
+          <div style={styles.passwordContainer}>
+            <input
+              type={showPassword ? "text" : "password"}
+              name="password"
+              placeholder="Password"
+              value={form.password}
+              onChange={handleChange}
+              required
+              style={{ ...styles.input, marginBottom: 0 }}
+            />
+            <button
+              type="button"
+              onClick={togglePassword}
+              style={styles.toggleButton}
+            >
+              {showPassword ? "Hide" : "Show"}
+            </button>
+          </div>
+
+          <button type="submit" style={styles.submit}>
+            Sign Up
           </button>
-        </div>
 
-        <button type="submit" style={styles.submit}>
-          Sign Up
-        </button>
-
-        {status.error && <p style={styles.error}>{status.error}</p>}
-        {status.success && <p style={styles.success}>{status.success}</p>}
-        <DirectoryLink link={"/"} buttonValue={"Home"}></DirectoryLink>
-      </form>
-    </div>
+          {status.error && <p style={styles.error}>{status.error}</p>}
+          {status.success && <p style={styles.success}>{status.success}</p>}
+        </form>
+      </div>
+      <NavFooter></NavFooter>
+    </Box>
   );
 }
 
 const styles = {
   container: {
-    minHeight: "100vh",
     display: "flex",
     justifyContent: "center",
     alignItems: "center",
-    background: "#f5f5f5",
+    padding: "10px",
   },
   form: {
     background: "white",
@@ -138,9 +165,9 @@ const styles = {
     cursor: "pointer",
   },
   submit: {
-    padding: "10px",
-    background: "#007bff",
+    background: "black",
     color: "white",
+    padding: "10px",
     fontSize: "16px",
     border: "none",
     borderRadius: "5px",

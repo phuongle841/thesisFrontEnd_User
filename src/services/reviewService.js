@@ -15,8 +15,7 @@ const reviewService = {
         return response.json();
       })
       .then((response) => {
-        console.log(response);
-        setUpdateStatus(true);
+        // reload page?
         // set notification?
       })
       .catch((error) => console.error(error));

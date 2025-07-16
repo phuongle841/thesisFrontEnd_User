@@ -14,8 +14,8 @@ import AuthorizationContext from "../context/authorizationContext";
 
 function CommentSection({ data }) {
   const { authorization } = useContext(AuthorizationContext);
-  const [title, setTitle] = useState("title");
-  const [comment, setComment] = useState("comment");
+  const [title, setTitle] = useState("");
+  const [comment, setComment] = useState("");
   const [rating, setRating] = useState(3);
   const [updateStatus, setUpdateStatus] = useState(null);
 
@@ -29,14 +29,15 @@ function CommentSection({ data }) {
   function onChangeRating(event, value) {
     setRating(value);
   }
-  function onClickSend() {
+
+  async function onClickSend() {
     const reviewTitle = title;
     const reviewDescription = comment;
     const reviewRating = rating;
     const productId = data.productId;
     const postReview = reviewService.post;
 
-    postReview(
+    await postReview(
       authorization,
       {
         reviewTitle,
@@ -45,7 +46,8 @@ function CommentSection({ data }) {
         productId,
       },
       // setUpdateStatus
-      location.reload
+      // cancelled out with react?
+      window.location.reload
     );
   }
 
@@ -104,29 +106,25 @@ function CommentSection({ data }) {
       <Box id="comment-display" sx={commentDisplay}>
         {data.reviewed.map((e) => {
           const sx = { display: "flex", gap: "10px" };
-          console.log(e);
-
           return (
-            <>
-              <Card
-                key={e.reviewId}
-                sx={{ padding: 1, border: "1px solid #000", height: "230px" }}
-              >
-                <DirectoryLink
-                  link={`/profile/${1}`}
-                  buttonValue={e.reviewer.userName}
-                  icon={<Avatar src={e.reviewer.userAvatarUrl}></Avatar>}
-                  sx={sx}
-                ></DirectoryLink>
-                <Typography variant="h5"> {e.reviewTitle}</Typography>
-                <p>{e.reviewDescription}</p>
-                <Rating
-                  defaultValue={e.reviewRating}
-                  sx={{ width: "1", maxWidth: "max-content" }}
-                  readOnly
-                />
-              </Card>
-            </>
+            <Card
+              key={e.reviewId}
+              sx={{ padding: 1, border: "1px solid #000", height: "230px" }}
+            >
+              <DirectoryLink
+                link={`/profile/${e.reviewer.userId}`}
+                buttonValue={e.reviewer.userName}
+                icon={<Avatar src={e.reviewer.userAvatarUrl}></Avatar>}
+                sx={sx}
+              ></DirectoryLink>
+              <Typography variant="h5"> {e.reviewTitle}</Typography>
+              <p>{e.reviewDescription}</p>
+              <Rating
+                defaultValue={e.reviewRating}
+                sx={{ width: "1", maxWidth: "max-content" }}
+                readOnly
+              />
+            </Card>
           );
         })}
       </Box>

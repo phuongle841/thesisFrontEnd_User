@@ -3,12 +3,15 @@ import { useContext, useEffect, useState } from "react";
 import { UserDataContext } from "../../components/Profile";
 import userService from "../../services/userService";
 import AuthorizationContext from "../../context/authorizationContext";
+import CloseIcon from "@mui/icons-material/Close";
+import { useNavigate } from "react-router-dom";
 
 function ProfileSetting() {
   const { user } = useContext(UserDataContext);
   const { authorization } = useContext(AuthorizationContext);
   const [userInformation, setUserInformation] = useState(null);
   const [settingStatus, setSettingStatus] = useState(false);
+  const navigate = useNavigate();
 
   useEffect(() => {
     setUserInformation(user);
@@ -56,6 +59,10 @@ function ProfileSetting() {
     setUserInformation({ ...user });
   }
 
+  function onExit() {
+    navigate(`/profile/${userInformation.userId}`);
+  }
+
   return (
     <Box
       component={Container}
@@ -65,19 +72,20 @@ function ProfileSetting() {
     >
       <Card sx={{ padding: 4 }}>
         <Box display={"flex"} justifyContent={"flex-end"}>
-          <button>Exit</button>
+          <CloseIcon onClick={onExit}></CloseIcon>
         </Box>
         {userInformation != null &&
           Object.keys(userInformation)?.map((key) => {
             const outPut = toName(key, userInformation[`${key}`]);
-            return outPut.editable == true ? (
+            if (outPut.editable == false) {
+              return;
+            }
+            return (
               <EditDiv
                 key={outPut.id}
                 outPut={outPut}
                 setInformation={setInformation}
               ></EditDiv>
-            ) : (
-              <></>
             );
           })}
 
@@ -93,10 +101,11 @@ function ProfileSetting() {
 }
 
 function EditDiv({ outPut, setInformation }) {
-  const [value, setValue] = useState(outPut.value);
+  const [value, setValue] = useState("");
 
   useEffect(() => {
-    setValue(outPut.value);
+    const newValue = outPut?.value ?? "";
+    setValue(newValue);
   }, [outPut]);
 
   function onChange(e) {

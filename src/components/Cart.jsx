@@ -17,6 +17,14 @@ function Cart() {
   const { authorization } = useContext(AuthorizationContext);
   const { cart, setCartItems } = useContext(CartContext);
   const [feedback, setFeedback] = useState("");
+  let total = 0;
+  if (cart != null) {
+    for (let index = 0; index < cart.length; index++) {
+      const quantity = cart[index].quantity;
+      const price = cart[index].recordProduct.productPrice;
+      total += quantity * price;
+    }
+  }
 
   function handleOrder() {
     const order = orderService.order;
@@ -37,6 +45,7 @@ function Cart() {
         {cart.length != 0 ? (
           <>
             <CartContainer data={cart}></CartContainer>
+            <h2 style={{ textAlign: "end" }}>{total}$</h2>
             <Box onClick={handleOrder} sx={{ alignSelf: "end" }}>
               <Button>Order</Button>
             </Box>

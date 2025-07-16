@@ -61,7 +61,6 @@ export default function ConTextSetUp() {
   function updateCartItem(cartItem) {
     const { productId } = cartItem.recordProduct;
     const { quantity } = cartItem;
-    console.log(productId, quantity);
 
     const newItems = cart.map((e) => {
       if (e.recordProduct.productId == productId) {
