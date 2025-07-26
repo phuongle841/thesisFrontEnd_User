@@ -1,6 +1,5 @@
 import { Link as RouterLink } from "react-router-dom";
 import { Button, Link } from "@mui/material";
-import { getCookieValue } from "../utils/Cookies";
 
 function DirectoryLink({ link, buttonValue, icon, sx }) {
   return (

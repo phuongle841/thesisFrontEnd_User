@@ -1,9 +1,10 @@
 import "../styles/ResultDisplayBar.css";
-function ResultDisplayBar(props) {
+function ResultDisplayBar({ data }) {
   return (
     <div id="ResultDisplayBar">
       <p>
-        1-48 of over 1,000,000 results for &quot;<span>Gaming</span>&quot;{" "}
+        1-48 of over 1,000,000 results for &quot;
+        <span>{data.categoryTitle}</span>&quot;{" "}
       </p>
       <select name="Sort" id="Sort">
         <option value="Featured">Sort by: Featured</option>

@@ -18,7 +18,8 @@ export default function Order() {
   const { authorization } = useContext(AuthorizationContext);
 
   const [orders, setOrders] = useState([]);
-  const [totalPages, setTotalPages] = useState(1);
+
+  const [totalPages, setTotalPages] = useState(null);
   const [currentPage, setCurrentPage] = useState(1);
 
   // Fetch orders
@@ -30,9 +31,9 @@ export default function Order() {
       authorization,
       (data) => {
         setOrders(data.orders);
-        setTotalPages(Math.ceil(data.count.Order / PAGE_SIZE));
+        setTotalPages(Math.floor(data.count.Order / PAGE_SIZE));
       },
-      currentPage * PAGE_SIZE,
+      (currentPage - 1) * PAGE_SIZE,
       PAGE_SIZE
     );
   }, [userId, authorization, currentPage]);

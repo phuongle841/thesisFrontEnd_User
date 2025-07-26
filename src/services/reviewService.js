@@ -1,7 +1,5 @@
 const reviewService = {
   post: async function (Authorization, data, setUpdateStatus) {
-    console.log({ ...data });
-
     await fetch(`http://localhost:3000/review`, {
       mode: "cors",
       method: "POST",

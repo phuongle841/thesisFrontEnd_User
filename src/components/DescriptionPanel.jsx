@@ -1,16 +1,18 @@
 import "../styles/DescriptionPanel.css";
-import { Rating } from "@mui/material";
+import { Rating, Typography } from "@mui/material";
 import AmountSelectBox from "./AmountSelectBox";
-import { useState } from "react";
+import { Link as RouterLink } from "react-router-dom";
 function DescriptionPanel({ data }) {
-  const [currentOrderedItem, setCurrentOrderedItem] = useState(null);
   const {
     productName,
     productRating,
     productPrice,
     productOrderAmount,
     productDescription,
+    productDetails,
+    Category,
   } = data;
+
   return (
     <div className="DescriptionPanel">
       <h2 className="ProductTitle">{productName}</h2>
@@ -36,13 +38,22 @@ function DescriptionPanel({ data }) {
       </div>
       <hr />
       <p>About this item</p>
-      <ul className="Description">
-        {Array.isArray(productDescription) &&
-          productDescription.map((description) => (
-            <li key={description}>
-              <p>{description}</p>
-            </li>
-          ))}
+      <ul className="Description">{productDescription}</ul>
+      <p>Details</p>
+      <ul className="Details">{productDetails}</ul>
+      <p>Category</p>
+      <ul className="Category">
+        {Category.map((e) => {
+          const link = `/category/${e.categoryId}`;
+
+          return (
+            <p key={e.categoryId}>
+              <Typography component={RouterLink} to={link}>
+                {e.categoryTitle}
+              </Typography>
+            </p>
+          );
+        })}
       </ul>
     </div>
   );

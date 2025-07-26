@@ -1,13 +1,16 @@
 import "../styles/CartContainer.css";
-import PropTypes from "prop-types";
 import { Box, Button, Divider, Snackbar } from "@mui/material";
 import { useContext, useState } from "react";
 import { CartContext } from "../context/cartContext";
+import { Link as RouterLink } from "react-router-dom";
+import { Link } from "@mui/material";
+import { Typography } from "@mui/material";
 
 function CartBox({ item, i }) {
   const [quantity, setQuantity] = useState(item.quantity ? item.quantity : 1);
   const { updateCartItem, removeCartItem } = useContext(CartContext);
   const [open, setOpen] = useState(false);
+  const link = `/product/${item.recordProduct.productId}`;
 
   function handleQuantityOnChange(event) {
     setQuantity(event.target.value);
@@ -25,12 +28,15 @@ function CartBox({ item, i }) {
     <>
       <div className="CartBox">
         <div className="CartBox-left" style={{ flex: "auto" }}>
-          <h1>No.{i + 1} </h1>
+          <Typography component={RouterLink} to={link}>
+            <h3>
+              No.{i + 1} {item.recordProduct.productName}{" "}
+            </h3>
+          </Typography>
           <h3>
-            Product Id: {item.recordProduct.productId} - Price:{" "}
+            Product Id: {item.recordProduct.productId}- Price:{" "}
             {item.recordProduct.productPrice}
           </h3>
-          <h3>{item.recordProduct.productName}</h3>
           <input
             type="number"
             name="quantity"

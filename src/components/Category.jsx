@@ -37,9 +37,11 @@ function Category() {
     <>
       <NavBar></NavBar>
       <NavBarShopping></NavBarShopping>
-      <ResultDisplayBar></ResultDisplayBar>
       {data ? (
-        <CategoriesProductPanel data={data}></CategoriesProductPanel>
+        <>
+          <ResultDisplayBar data={data}></ResultDisplayBar>
+          <CategoriesProductPanel data={data}></CategoriesProductPanel>
+        </>
       ) : (
         <Skeleton></Skeleton>
       )}

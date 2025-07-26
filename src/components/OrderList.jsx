@@ -35,7 +35,8 @@ function OrderCard({ data, authorization }) {
   const [feedback, setFeedback] = useState("");
   const feedbackRef = useRef(null);
 
-  const { orderDate, orderStatus, ProductId, Product } = data;
+  const { orderId, orderDate, orderStatus, ProductId, Product } = data;
+
   const { productName, productPrice, productImages } = Product;
 
   useDidUpdateEffect(() => {
@@ -60,7 +61,7 @@ function OrderCard({ data, authorization }) {
         to={`/product/${ProductId}`}
         variant="h6"
       >
-        {productName}
+        {orderId} -{productName}
       </Typography>
 
       <Box
@@ -79,7 +80,6 @@ function OrderCard({ data, authorization }) {
           />
         </Box>
 
-        {/* Quantity */}
         <Box display="flex" flexDirection="column">
           {orderStatus === "PREPARED" ? (
             <>
@@ -95,7 +95,7 @@ function OrderCard({ data, authorization }) {
             <Typography>{quantity}</Typography>
           )}
           <Box>
-            <Typography>Price{productPrice}</Typography>
+            <Typography>Price: {productPrice}</Typography>
           </Box>
           <Box>
             <Typography>Status: {orderStatus}</Typography>
@@ -105,8 +105,6 @@ function OrderCard({ data, authorization }) {
           </Typography>
         </Box>
       </Box>
-
-      <Button>Paid</Button>
     </Card>
   );
 }

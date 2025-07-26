@@ -34,7 +34,7 @@ function OrderPanel({ data }) {
           <button
             id="add-to-cart"
             onClick={() => {
-              addCartItems(data);
+              addCartItems({ quantity: 1, recordProduct: data });
             }}
           >
             Add to cart
