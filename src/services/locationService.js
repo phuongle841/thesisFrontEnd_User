@@ -1,6 +1,7 @@
+const URL = import.meta.env.VITE_BACKENDURL;
 const locationService = {
   fetch: async (userId, Authorization, setData) => {
-    await fetch(`http://localhost:3000/location/${userId}/`, {
+    await fetch(`${URL}/location/${userId}/`, {
       mode: "cors",
       headers: { Authorization: Authorization },
     })

@@ -1,6 +1,7 @@
+const URL = import.meta.env.VITE_BACKENDURL;
 const cartService = {
   fetch: async function (userId, Authorization, setData) {
-    await fetch(`http://localhost:3000/cart/${userId}`, {
+    await fetch(`${URL}/cart/${userId}`, {
       mode: "cors",
       headers: {
         Authorization: Authorization,
@@ -18,7 +19,7 @@ const cartService = {
       });
   },
   update: async function (userId, Authorization, data) {
-    await fetch(`http://localhost:3000/users/${userId}/cart`, {
+    await fetch(`${URL}/users/${userId}/cart`, {
       mode: "cors",
       method: "PUT",
       headers: {

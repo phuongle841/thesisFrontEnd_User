@@ -1,6 +1,9 @@
+const URL = import.meta.env.VITE_BACKENDURL;
 const productService = {
   fetchProduct: async (id, setData) => {
-    await fetch(`http://localhost:3000/products/${id}`, { mode: "cors" })
+    await fetch(`${URL}/products/${id}`, {
+      mode: "cors",
+    })
       .then((response) => response.json())
       .then((response) => {
         setData(response);

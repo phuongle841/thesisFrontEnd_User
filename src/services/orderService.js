@@ -1,15 +1,13 @@
+const URL = import.meta.env.VITE_BACKENDURL;
 const orderService = {
   fetch: async (userId, Authorization, setData, skip = 0, take = 10) => {
-    await fetch(
-      `http://localhost:3000/orders/user/${userId}?take=${take}&skip=${skip}`,
-      {
-        mode: "cors",
-        method: "GET",
-        headers: {
-          Authorization: Authorization,
-        },
-      }
-    )
+    await fetch(`${URL}/orders/user/${userId}?take=${take}&skip=${skip}`, {
+      mode: "cors",
+      method: "GET",
+      headers: {
+        Authorization: Authorization,
+      },
+    })
       .then((response) => {
         return response.json();
       })
@@ -21,7 +19,7 @@ const orderService = {
       });
   },
   update: async (Authorization, data, setFeedback) => {
-    await fetch(`http://localhost:3000/orders`, {
+    await fetch(`${URL}/orders`, {
       mode: "cors",
       method: "PUT",
       headers: {
@@ -43,7 +41,7 @@ const orderService = {
       });
   },
   order: async (userId, Authorization, data, setFeedback) => {
-    await fetch(`http://localhost:3000/orders/user/${userId}`, {
+    await fetch(`${URL}/orders/user/${userId}`, {
       mode: "cors",
       method: "POST",
       headers: {

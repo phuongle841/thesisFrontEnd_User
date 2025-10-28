@@ -27,6 +27,7 @@ export default function LoginPage() {
   const { setUserId } = useContext(UserContext);
   const { setAuthorization } = useContext(AuthorizationContext);
   const navigate = useNavigate();
+  const URL = import.meta.env.VITE_BACKENDURL;
 
   const handleSubmit = (event) => {
     if (emailError || passwordError) {
@@ -38,7 +39,7 @@ export default function LoginPage() {
     event.preventDefault();
 
     (async () => {
-      const rawResponse = await fetch("http://localhost:3000/login", {
+      const rawResponse = await fetch(`${URL}/login`, {
         method: "POST",
         headers: {
           Accept: "application/json",

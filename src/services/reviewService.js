@@ -1,6 +1,7 @@
+const URL = import.meta.env.VITE_BACKENDURL;
 const reviewService = {
   post: async function (Authorization, data, setUpdateStatus) {
-    await fetch(`http://localhost:3000/review`, {
+    await fetch(`${URL}/review`, {
       mode: "cors",
       method: "POST",
       headers: {

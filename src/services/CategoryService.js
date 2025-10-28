@@ -1,6 +1,9 @@
+const URL = import.meta.env.VITE_BACKENDURL;
 const CategoryService = {
   fetch: async (id, setData) => {
-    await fetch(`http://localhost:3000/categories/${id}`, { mode: "cors" })
+    await fetch(`${URL}/categories/${id}`, {
+      mode: "cors",
+    })
       .then((response) => response.json())
       .then((response) => {
         setData(response);
@@ -8,7 +11,9 @@ const CategoryService = {
       .catch((error) => console.error(error));
   },
   fetchBatch: async (setData) => {
-    await fetch(`http://localhost:3000/categories/`, { mode: "cors" })
+    await fetch(`${URL}/categories/`, {
+      mode: "cors",
+    })
       .then((response) => response.json())
       .then((response) => {
         setData(response);

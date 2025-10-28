@@ -1,6 +1,8 @@
+const URL = import.meta.env.VITE_BACKENDURL;
+
 const userService = {
   authenticate: async (Authorization, setData) => {
-    fetch(`http://localhost:3000/users/authenticate`, {
+    fetch(`${URL}/users/authenticate`, {
       mode: "cors",
       headers: { Authorization: Authorization },
     })
@@ -13,7 +15,7 @@ const userService = {
       .catch((error) => console.error(error));
   },
   fetch: async (userId, setData) => {
-    fetch(`http://localhost:3000/users/${userId}`, { mode: "cors" })
+    fetch(`${URL}/users/${userId}`, { mode: "cors" })
       .then((response) => response.json())
       .then((response) => {
         setData(response);
@@ -21,7 +23,7 @@ const userService = {
       .catch((error) => console.error(error));
   },
   update: async (userId, Authorization, data, setData) => {
-    await fetch(`http://localhost:3000/users/${userId}/`, {
+    await fetch(`${URL}/users/${userId}/`, {
       mode: "cors",
       method: "PUT",
       headers: {

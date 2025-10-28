@@ -12,7 +12,6 @@ import AuthorizationContext from "./context/authorizationContext.jsx";
 import { deleteCookie, getCookieValue } from "./utils/Cookies.js";
 import userService from "./services/userService.js";
 import cartService from "./services/cartService.js";
-import orderService from "./services/orderService.js";
 const router = createBrowserRouter(indexRoute);
 
 // todo: later refactor to separate module

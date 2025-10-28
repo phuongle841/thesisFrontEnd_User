@@ -1,6 +1,7 @@
+const URL = import.meta.env.VITE_BACKENDURL;
 const searchService = {
   fetch: async (query, setData) => {
-    fetch(`http://localhost:3000/search?product=${query}`, {
+    fetch(`${URL}/search?product=${query}`, {
       mode: "cors",
     })
       .then((response) => {
