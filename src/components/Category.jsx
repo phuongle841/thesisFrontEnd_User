@@ -14,6 +14,7 @@ import AuthorizationContext from "../context/authorizationContext";
 
 // Display list of products
 function Category() {
+  console.log(import.meta.env.VITE_BACKENDURL);
   const { id } = useParams();
   const [data, setData] = useState();
   const { cart } = useContext(CartContext);
